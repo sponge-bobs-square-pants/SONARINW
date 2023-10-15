@@ -129,6 +129,9 @@ const Wrapper = styled.article`
     .container:hover::before {
       content: ''; /* Remove the background overlay on hover */
     }
+    .link {
+      display: none; /* Hide the element on screens with a max width of 992px */
+    }
   }
 `
 export default Product
