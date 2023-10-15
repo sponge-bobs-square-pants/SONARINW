@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { loadStripe } from '@stripe/stripe-js'
-import { CardElement, useStripe, Elements, useElements, PaymentElement } from '@stripe/react-stripe-js'
+import { CardElement, useStripe, Elements, useElements } from '@stripe/react-stripe-js'
 import axios from 'axios'
 import {useCartContext} from '../context/CartContext'
 import {useUserContext} from '../context/UserContext'
@@ -15,7 +15,7 @@ const CheckOutForm = () => {
   const {myUser} = useUserContext();
   // const history = useHistory();
   //STRIPE
-  const [email, setEmail] = useState('');
+  // const [email, setEmail] = useState('');
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState('');
@@ -55,7 +55,7 @@ const CheckOutForm = () => {
       setTotalAmount(totalAmount)
     } 
     catch (error) {
-       console.log(error.response);
+      //  console.log(error.response);
     }
   }
   useEffect(() => {
@@ -90,9 +90,9 @@ const CheckOutForm = () => {
       }, 10000)
     }
   }
-  const paymentElementOptions = {
-    layout: "tabs"
-  }
+  // const paymentElementOptions = {
+  //   layout: "tabs"
+  // }
     return <div>
       <form id='payment-form' onSubmit={handleSubmit}>
         {
@@ -120,10 +120,10 @@ const CheckOutForm = () => {
         {error && <div className='card-error' role='alert'>{error}</div>}
         <p className={succeeded ? 'result-message' : 'result-message hidden'}>
           Payment succeeded
-          <a href={`https://dashboard.stripe.com/test/payments`}>
+          {/* <a href={`https://dashboard.stripe.com/test/payments`}>
             Stripe dashboard
-          </a>
-          Refresh the page to pay
+          </a> */}
+          {/* Refresh the page to pay */}
         </p>
       </form>
     </div>

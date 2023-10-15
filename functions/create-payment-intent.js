@@ -6,9 +6,9 @@ const stripe = require('stripe')(process.env.REACT_APP_STRIPE_SECRET_KEY)
 
 exports.handler = async function(event, context){
     // console.log(event);
-    console.log(stripe);
+    // console.log(stripe);
     if(event.body){
-        const {cart, shipping_fee, total_amount} = JSON.parse(event.body)
+        const {cart, shipping_fee} = JSON.parse(event.body)
         // console.log(cart);
         
         const calculateOrderAmount = async () => {
