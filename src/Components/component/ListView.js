@@ -18,19 +18,19 @@ const ListView = ({products, totalPages, updatePage}) => {
     };
   }, []);
 
-  const handleClick = async (_id) => {
-    const url = `/products/${_id}`;
-    window.location.href=url;
-  }
-    
-
+  // const handleClick = async (_id) => {
+  //   const url = `/products/${_id}`;
+  //   window.location.href=url;
+  // }
   return <Wrapper>
     <div style={{opacity:'0'}}>'</div>
     {products.map((product) => {
         const {_id, Image, ProductName, Price, Description} = product;
-        return <article key={_id} className='container' onClick={() => handleClick(_id)}>
+        return <article key={_id} className='container'>
+          <Link to={`/products/${_id}`}>
             <img src={Image} alt={ProductName} className='img'></img>
-            <div className='upthediv' >
+          </Link>
+            <div className='upthediv'>
                 <h4>{ProductName}</h4>
                 <h5 className='price'>{formatPrice(Price * 9 /10)}</h5>
                 {/* <p className={`${window.innerWidth <  992 ? 'hide-on-mobile' : 'description'}`}>{Description.substring(0, 120)}...</p> */}
