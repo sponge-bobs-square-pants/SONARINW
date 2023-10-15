@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
 import '../Pages/MainPage.css'
 import styled from 'styled-components'
 import { formatPrice } from '../component/utils/helpers'
@@ -10,15 +11,35 @@ const Product = ({ProductName , Price, _id, Image}) => {
     triggerOnce: true, // Only trigger once when element comes into view
     threshold: 0.2, // 20% of the element must be visible
   });
+  // const handleClick = async (_id) => {
+  //   const url = `/products/${_id}`;
+  //   window.location.href=url;
+  // }
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  
   return <Wrapper>
     <div ref={ref} className={`container ${inView ? 'animate-slide-in' : ''}`}>
       <div style={{opacity:'0'}}>'</div>
-        <Link to={`/products/${_id}`}>
+        <Link>
         <img src={Image} alt={ProductName} className='img'/>
         </Link>
-        <Link to={`/products/${_id}`} className='link'>
-            <FaSearch />
-        </Link>
+        {windowWidth > 992 &&(
+          <Link to={`/products/${_id}`} className='link'>
+          <FaSearch />
+      </Link>
+        )}
+        
         <footer className='footer'>
             <h5 style={{fontWeight:'400', textTransform:'initial', letterSpacing:'0.08rem', fontSize:'0.9rem', 
           position:'relative', top:'-25px'}}>{ProductName}</h5>
@@ -117,21 +138,6 @@ const Wrapper = styled.article`
   /* Apply the animation to the element */
   .animate-slide-in {
     animation: slideInFromTop 1s ease-in-out forwards; /* Use the animation with a duration of 0.5s */
-  }
-
-  @media (max-width: 992px) {
-    .container:hover img {
-      opacity: 1; /* Remove opacity change on hover */
-    }
-    .container:hover .link {
-      opacity: 0; /* Remove opacity change on hover */
-    }
-    .container:hover::before {
-      content: ''; /* Remove the background overlay on hover */
-    }
-    .link {
-      display: none; /* Hide the element on screens with a max width of 992px */
-    }
   }
 `
 export default Product
