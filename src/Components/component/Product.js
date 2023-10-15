@@ -10,7 +10,11 @@ const Product = ({ProductName , Price, _id, Image}) => {
     triggerOnce: true, // Only trigger once when element comes into view
     threshold: 0.2, // 20% of the element must be visible
   });
-  return <Wrapper>
+  const handleClick = async (_id) => {
+    const url = `/products/${_id}`;
+    window.location.href=url;
+  }
+  return <Wrapper onClick={() => handleClick(_id)}>
     <div ref={ref} className={`container ${inView ? 'animate-slide-in' : ''}`}>
       <div style={{opacity:'0'}}>'</div>
       
