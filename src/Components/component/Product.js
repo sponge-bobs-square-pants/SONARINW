@@ -118,5 +118,17 @@ const Wrapper = styled.article`
   .animate-slide-in {
     animation: slideInFromTop 1s ease-in-out forwards; /* Use the animation with a duration of 0.5s */
   }
+
+  @media (max-width: 992px) {
+    .container:hover img {
+      opacity: 1; /* Remove opacity change on hover */
+    }
+    .container:hover .link {
+      opacity: 0; /* Remove opacity change on hover */
+    }
+    .container:hover::before {
+      content: ''; /* Remove the background overlay on hover */
+    }
+  }
 `
 export default Product
