@@ -10,7 +10,7 @@ const Product = ({ProductName , Price, _id, Image}) => {
     triggerOnce: true, // Only trigger once when element comes into view
     threshold: 0.2, // 20% of the element must be visible
   });
-  const handleClick = async (_id) => {
+  const handleClick = (_id) => {
     const url = `/products/${_id}`;
     window.location.href=url;
   }
