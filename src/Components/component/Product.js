@@ -31,7 +31,7 @@ const Product = ({ProductName , Price, _id, Image}) => {
   return <Wrapper>
     <div ref={ref} className={`container ${inView ? 'animate-slide-in' : ''}`}>
       <div style={{opacity:'0'}}>'</div>
-        <Link>
+        <Link to={`/products/${_id}`}>
         <img src={Image} alt={ProductName} className='img'/>
         </Link>
         {windowWidth > 992 &&(
