@@ -1,7 +1,10 @@
 const { default: axios } = require('axios');
-// const { products_url } = require('../src/Components/component/utils/constants');
-
+const express = require("express");
+const app = express();
 require('dotenv').config()
+app.use(express.static("public"));
+app.use(express.json());
+
 const stripe = require('stripe')(process.env.REACT_APP_STRIPE_SECRET_KEY)
 
 exports.handler = async function(event, context){
@@ -12,11 +15,11 @@ exports.handler = async function(event, context){
         // console.log(cart);
         
         const calculateOrderAmount = async () => {
-            // console.log(cart,'This is me');
-
+            console.log(cart,'This is me');
             try {
                 const productsRequest = cart.map((item) => {
-                    const adjustedID = item.id.slice(0, -1)
+                    // const adjustedID = item.id.slice(0, -1)
+                    let adjustedID = item.id.replace(/[^0-9]/g, '');
                     // console.log(adjustedID, 'Adjusted ID');
                     return {url: `${process.env.REACT_APP_PRODUCT_URL}/${adjustedID}`, quantity:item.amount}
                 })
@@ -39,12 +42,16 @@ exports.handler = async function(event, context){
             }
             
         }
+
         try {
             const amount = await calculateOrderAmount();
 
             const paymentIntent = await stripe.paymentIntents.create({
                 amount:amount,
                 currency:'inr',
+                automatic_payment_methods:{
+                    enabled:true,
+                },
             })
             return{
                 statusCode:200,
