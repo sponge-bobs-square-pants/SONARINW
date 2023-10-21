@@ -37,7 +37,7 @@
         const secureKey = process.env.REACT_APP_SECURE_KEY
         // console.log(key);
         const {cart, shipping_fee, totalAmount} = useCartContext();
-
+        console.log(cart);
         const checkFormCompleteness = () => {
             // You can define your own logic to check form completeness here.
             // For example, check if all required fields are filled.
