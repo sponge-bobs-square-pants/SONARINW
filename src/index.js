@@ -9,8 +9,6 @@ import { CartProvider } from './Components/context/CartContext';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { UserProvider } from './Components/context/UserContext';
 
-//dev-z684ruavlegh28ml.eu.auth0.com
-//A0ig6a4SlzaTaTkIQ69QJdCzhXU7DQxB
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
