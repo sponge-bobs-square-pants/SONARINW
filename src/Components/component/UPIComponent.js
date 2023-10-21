@@ -36,8 +36,8 @@
         const key = process.env.REACT_APP_RAZOR_PAY_KEY
         const secureKey = process.env.REACT_APP_SECURE_KEY
         // console.log(key);
-        const {cart, shipping_fee, totalAmount} = useCartContext();
-        console.log(cart);
+        const {cart, shipping_fee, totalAmount, clearCart} = useCartContext();
+        // console.log(typeof(cart[0].Price), 'This is cart');
         const checkFormCompleteness = () => {
             // You can define your own logic to check form completeness here.
             // For example, check if all required fields are filled.
@@ -65,6 +65,8 @@
                 // Add other form fields as needed
                 amount: amountFormated, // Payment amount
                 orderID, // Order ID
+                cart,
+                isPaymentSuccessful:false
             };
         
             // Send the form data to your server's API endpoint
@@ -152,15 +154,15 @@
                     sms: true,
                     email:true,
                 },
-                // handler: function(response){
-                //     if(response.razorpay_payment_id){
-                //         // alert('Payment successful')
-                //         console.log('payment success');
-                //     }
-                //     else {
-                //         alert('Payment failed. Please try again')
-                //     }
-                // }
+                handler: function(response){
+                    if(response.razorpay_payment_id){
+                        // alert('Payment successful')
+                        clearCart();
+                    }
+                    else {
+                        alert('Payment failed. Please try again')
+                    }
+                }
             };
             const rzp1 = new window.Razorpay(options);
             rzp1.open()
