@@ -13,6 +13,7 @@ useEffect(() => {
     //     setMyUser(false)
     // }
     setMyUser(user)
+    console.log(user);
 },[user])
 
   return (

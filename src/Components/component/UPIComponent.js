@@ -22,6 +22,7 @@
         const {myUser} = useUserContext();
         const name = myUser ? myUser.name : 'User Name Not Available';
         // console.log(name);
+        console.log(name);
         const [amount, setAmount] = useState(0);
         const [currency, setCurrency] = useState('INR');
         const [orderID, setOrderID] = useState('');
