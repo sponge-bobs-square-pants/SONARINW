@@ -40,7 +40,8 @@ export const services = [
     icon: <FaPhoneAlt />,
     title: 'Contact',
     text:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates',
+      'Email: chawla1310@gmail.com  Number: +919016528043', 
+      
   },
 ]
 
