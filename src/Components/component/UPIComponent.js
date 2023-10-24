@@ -4,6 +4,8 @@
     import styled from 'styled-components';
     import { formatPrice } from './utils/helpers';
     import { useUserContext } from '../context/UserContext';
+    // import { useAuth0 } from '@auth0/auth0-react';
+    
     function razorpayScript(src) {
         return new Promise((resolve) => {
         const script = document.createElement('script');
@@ -19,12 +21,13 @@
     }
 
     const UPIComponent = () => {
-        const {myUser} = useUserContext();
+        // const {user} = useAuth0();
+        const {myUser, userId} = useUserContext();
         const name = myUser ? myUser.name : 'User Name Not Available';
         // console.log(name);
-        console.log(name);
+        console.log(userId);
         const [amount, setAmount] = useState(0);
-        const [currency, setCurrency] = useState('INR');
+        // const [currency, setCurrency] = useState('INR');
         const [orderID, setOrderID] = useState('');
         const [email, setEmail] = useState('');
         const [address, setAddress] = useState('');
@@ -67,7 +70,8 @@
                 amount: amountFormated, // Payment amount
                 orderID, // Order ID
                 cart,
-                isPaymentSuccessful:false
+                isPaymentSuccessful:false,
+                userId,
             };
         
             // Send the form data to your server's API endpoint
@@ -124,7 +128,7 @@
             if(!amount){
             const data = await fetch(`${process.env.REACT_APP_GENERAL_ROUTE}/razorpay`, {method: 'POST'}).then((t) => t.json())
             setAmount(data.amount)
-            setCurrency(data.currency)
+            // setCurrency(data.currency)
             setOrderID(data.order_id)
             // console.log(data, orderID);
             // console.log(data.amount, data.currency, data.order_id);s
