@@ -6,7 +6,9 @@ const ShippingPolicies = () => {
   return (
     <div>
     <Nav />
-      Shipping Policies
+    <div>
+    
+      Shipping Policies, Return and Refund
       <h3>1. Shipping Methods and Times</h3>
       <p>Shipping Methods: Standard Shipping</p>
       <p>Estimated Shipping Time: 10 days</p>
@@ -68,6 +70,7 @@ const ShippingPolicies = () => {
         policies link.
       </p>
       <Footer />
+    </div>
     </div>
   )
 }
