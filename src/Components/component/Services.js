@@ -7,9 +7,9 @@ const Services = () => {
   return <Wrapper className='service_style'>
     <div className='section-center'>
         <article className='header'>
-            <h3>Custom Clothes <br />
+            <h3>Clothes <br />
             Built Only For You</h3> 
-            <p>Aliquip minim do irure dolor deserunt eiusmod culpa nulla. Velit dolor quis duis nostrud id.</p>   
+            <p>We source only the finest materials to ensure your clothing is not only fashionable but also comfortable and durable.</p>   
         </article>
         <div className='services-center'>
             {services.map((service) => {

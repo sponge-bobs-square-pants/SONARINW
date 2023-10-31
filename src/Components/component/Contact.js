@@ -5,7 +5,7 @@ const Contact = () => {
   return <Wrapper className='section-center'>
     <h2>Join our newsletter and get 10% off</h2>
     <div className='content'>
-      <p>Qui do aliquip ut deserunt occaecat dolor magna qui ut reprehenderit in dolor laborum commodo. Eiusmod veniam nisi veniam ut.</p>
+      <p>Subscribe to the newsletter to receive information about active promotions and discounts</p>
     <form className='contact-form'>
       <input type='email' className='form-input' placeholder='Enter Your Email'>
       </input>
