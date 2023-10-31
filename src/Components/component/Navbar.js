@@ -48,8 +48,16 @@ const Nav = () => {
             {
               myUser && <li>
                 <Link to='/Checkout'>Checkout</Link>
+                
               </li>
             }
+             {
+              myUser && <li>
+               <Link to='/OrderHistory'>Orders</Link>
+                
+              </li>
+            }
+            
         </ul>
         <CartButtons />
     </div>

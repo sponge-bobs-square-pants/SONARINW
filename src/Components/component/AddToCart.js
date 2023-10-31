@@ -9,8 +9,8 @@ const AddToCart = ({ Product }) => {
     let Products1 = Product[0];
     
     const {addToCart} = useCartContext()
-    const {_id, Size} = Product[0];
-    
+    const {_id, Size, Description} = Product[0];
+    // console.log(Description);
     const [amount, setAmount] = useState(1);
     // const [mainSize, setMainSize] = useState(Object.keys(Size)[0])
     const [sizeSelected, setSizeSelected] = useState(false);
@@ -70,7 +70,7 @@ const AddToCart = ({ Product }) => {
     <div className='btn-container'>
         <AmountButtons amount={amount} increase={increase} decrease={decrease}/>
         <Link to='/cart' className='btn' style={{textDecoration:'none', textAlign:'center', position:'relative', top:'-67px'}}
-        onClick={() => addToCart(_id, amount, Products1, mainSize)}>Add to Cart</Link>
+        onClick={() => addToCart(_id, amount, Products1, mainSize, Description)}>Add to Cart</Link>
     </div>}
   </Wrapper>)
   

@@ -13,6 +13,7 @@ import CartPage from "./Components/Pages/CartPage";
 import PrivateRoute from "./Components/Pages/PrivateRoute";
 import AuthWrapper from "./Components/Pages/AuthWrapper";
 import ShippingPolicies from "./Components/Pages/ShippingPolicies";
+import OrderHistory from "./Components/Pages/OrderHistory";
 function App() {
   return (
     <AuthWrapper>
@@ -27,6 +28,7 @@ function App() {
         <Route exact path="/Products" element={<Products />} />
         
         <Route exact path="/Checkout" element={<PrivateRoute><CheckoutPage /></PrivateRoute>} />
+        <Route exact path="/OrderHistory" element={<PrivateRoute><OrderHistory /></PrivateRoute>} />
         <Route exact path="/Shipping" element={<ShippingPolicies />} />
         <Route exact path='/Products/:id' element={<SingleProduct />} />
         <Route exact path='/Cart' element={<CartPage />} />

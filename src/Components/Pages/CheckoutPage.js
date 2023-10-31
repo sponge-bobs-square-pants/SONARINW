@@ -1,22 +1,21 @@
 import React from 'react'
 import '../Pages/MainPage.css'
 import styled from 'styled-components'
-// import PageHero from '../component/PageHero'
 import Nav from '../component/Navbar'
-// import Sidebar from '../component/Sidebar'
 import Footer from '../component/Footer'
 import { useCartContext } from '../context/CartContext'
 import { Link } from 'react-router-dom'
-import StripeCheckout from '../component/StripeCheckout'
+// import StripeCheckout from '../component/StripeCheckout'
 import CartCheckout from '../component/CartCheckout'
 import UPIComponent from '../component/UPIComponent'
-import FormComponent from '../component/FormComponent'
+import PageHero from '../component/PageHero'
+// import FormComponent from '../component/FormComponent'
 const CheckoutPage = () => {
   const {cart} = useCartContext();
   return <main>
     <Nav/>
-    {/* <PageHero title="Checkout" /> */}
-    <Wrapper className='page section1 section-center'>
+    <PageHero title="Checkout" />
+    <Wrapper className='page' style={{overflow:'hidden', width:'100px'}}>
       {cart.length < 1 ? <div className='empty'>
         <h2>Your Cart Is empty</h2>
         <Link to='/products' className='btn' style={{textDecoration:'none'}}>
@@ -25,11 +24,7 @@ const CheckoutPage = () => {
       </div>: 
       <div className='checkout-content'>
       <CartCheckout />
-      
-      {/* <StripeCheckout /> */}
       <UPIComponent />
-      {/* <FormComponent /> */}
-      {/* <div style={{paddingTop:'100px', paddingBottom:'100px'}}></div>S */}
       </div>
       }
     </Wrapper>
@@ -41,6 +36,12 @@ const Wrapper = styled.div`
   align-items:center;
   justify-content:center;
   flex-direction: column;
+  width: 90vw;
+  margin: 0 auto;
+  max-width: 1170px;
+  padding-bottom: 11.6rem;
+  padding-top:5rem;
+
   .empty{
     text-align:center;
   }
@@ -52,6 +53,16 @@ const Wrapper = styled.div`
     position:absolute;
     grid-template-columns: 1fr 1fr;
     gap: 300px;
+  }
+  @media(max-width: 992px){
+    // width: 90vw;
+    margin: 0;
+    max-width: 0px;
+    padding: 0rem;
+    flex-grow: 1;
+    justify-content: space-between;
+    // padding:50%;
+    overflow:hidden
   }
 `
 export default CheckoutPage

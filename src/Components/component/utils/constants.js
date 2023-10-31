@@ -26,21 +26,21 @@ export const services = [
     icon: <MdAttachMoney />,
     title: 'Cost',
     text:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates, ea. Perferendis corrupti reiciendis nesciunt rerum velit autem unde numquam nisi',
+      'Affordable clothes with good quality material.',
   },
   {
     id: 2,
     icon: <FaPlaneDeparture />,
     title: 'Delivery',
     text:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates, ea. Perferendis corrupti reiciendis nesciunt rerum velit autem unde numquam nisi',
+      'Free Delivery All across India',
   },
   {
     id: 3,
     icon: <FaPhoneAlt />,
     title: 'Contact',
     text:
-      'Email: chawla1310@gmail.com  Number: +919016528043', 
+      'Email: chawla1310@gmail.com Number: +919016528043', 
       
   },
 ]

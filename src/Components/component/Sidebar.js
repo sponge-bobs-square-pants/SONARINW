@@ -31,6 +31,9 @@ const Sidebar = () => {
                 {myUser && (<li>
                     <Link to='/checkout' style={{textDecoration: 'none'}} onClick={closeSidebar}>Checkout</Link>
                  </li>)}
+                 {myUser && (<li>
+                    <Link to='/OrderHistory' style={{textDecoration: 'none'}} onClick={closeSidebar}>Orders</Link>
+                 </li>)}
                 
             </ul>
             <CartButtons /> 

@@ -10,7 +10,7 @@ import {
   const CartReducer = (state, action) => {
     
     if(action.type === ADD_TO_CART){
-        const {_id, amount, Products1, size} = action.payload;
+        const {_id, amount, Products1, size, Description} = action.payload;
         // console.log(state.cart);
         const tempItem = state.cart.find((i) => i.id === _id + size)
         // console.log(_id + size);
@@ -41,6 +41,7 @@ import {
                 Price:Price1,
                 Max:Products1.Size[size],
                 size:size,
+                Description:Description,
             };
             return{...state, cart:[...state.cart, newItem]}
             

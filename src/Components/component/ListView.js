@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Pagination from './Pagination'
 const ListView = ({products, totalPages, updatePage}) => {
+  console.log(products);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
   useEffect(() => {
     const handleResize = () => {
@@ -26,6 +27,7 @@ const ListView = ({products, totalPages, updatePage}) => {
     <div style={{opacity:'0'}}>'</div>
     {products.map((product) => {
         const {_id, Image, ProductName, Price, Description} = product;
+        // console.log(_id, Image, ProductName, Price, Description);
         return <article key={_id} className='container'>
           <Link to={`/products/${_id}`}>
             <img src={Image} alt={ProductName} className='img'></img>

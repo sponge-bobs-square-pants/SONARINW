@@ -67,6 +67,7 @@ body, html {
    }
    .section {
     padding: 5rem 0;
+    /* color: darkgrey; */
   }
   .section-center {
     width: 90vw;

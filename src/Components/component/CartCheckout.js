@@ -92,7 +92,16 @@ padding-bottom:20px;
   }
 
   @media(max-width: 992px){
-    background:red;
+    // background:red;
+    width:90vw;
+    // max-height:270px;
+    left:50%;
+    overflow:hidden;
+    .products {
+      max-height:200px;
+      overflow-y:auto;
+      padding-left:10px;
+    }
   }
 `
 export default CartCheckout

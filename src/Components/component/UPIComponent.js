@@ -41,7 +41,9 @@
         const secureKey = process.env.REACT_APP_SECURE_KEY
         // console.log(key);
         const {cart, shipping_fee, totalAmount, clearCart} = useCartContext();
+        // console.log(cart);
         // console.log(typeof(cart[0].Price), 'This is cart');
+        console.log(cart, 'This is cart');
         const checkFormCompleteness = () => {
             // You can define your own logic to check form completeness here.
             // For example, check if all required fields are filled.
@@ -53,12 +55,14 @@
 
         const handleFormSubmit = async () => {
             // console.log(orderID, 'formsubmit');
+            // console.log(cart, 'This is the cart value');
             try {
                 const amountFormated = formatPrice(amount)
                 const headers = {
                     'x-api-key': secureKey,
                 }
             // Create an object with the form data
+
             const formData = {
                 name,
                 email,
@@ -73,9 +77,10 @@
                 isPaymentSuccessful:false,
                 userId,
             };
-        
+            
             // Send the form data to your server's API endpoint
             await axios.post(`${process.env.REACT_APP_GENERAL_ROUTE}/submitForm`, formData, {headers});
+            // await axios.post(`http://localhost:5000/api/v1/submitForm`, formData, {headers});
         
             // Optionally, you can display a success message to the user
             // alert('Form submitted successfully.');
@@ -92,6 +97,7 @@
             console.log(error.response);
             }
         };
+        // console.log(cart, 'After handle cart');
         const createPaymentIntent = async () => {
             // console.log(cart);
             // console.log('hello');
@@ -227,11 +233,11 @@
                 <input type="text" placeholder="Enter your city" value={city} onChange={handleCityChange}  onBlur={checkFormCompleteness}/>
             </div>
             </form>
+            
             <button onClick={() =>{
                 razorpay();
                 handleFormSubmit();
-            }} style={{position:'relative', width:'480px', padding:'20px',
-            background:'#57574a', color:'white', letterSpacing:'0.1rem', height:'70px'}} disabled={isButtonDisabled}>
+            }}disabled={isButtonDisabled} className='PayButton'>
                 PAY NOW
             </button>
         </FormWrapper>
@@ -242,7 +248,15 @@
     position:relative;
     left:700px;
     top:60px;
-
+    .PayButton{
+        position:relative;
+        width:480px;
+        padding:20px;
+        background:#57574a;
+        color:white;
+        letter-spacing:0.1rem;
+        height:70px;
+    }
     h2 {
         text-align: center;
     }
@@ -270,6 +284,7 @@
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 4px;
+        // width:100%;
     }
 
     input[readonly] {
@@ -285,6 +300,47 @@
         border-radius: 4px;
         cursor: pointer;
     }
+    @media (max-width: 768px) {
+        form {
+          grid-template-columns: 1fr;
+        }
+      }
+
+    @media (max-width: 992px) {
+        position:relative;
+        left:100px;
+        top:250px;
+        // overflow:hidden;
+        .PayButton{
+                position:relative;
+                top:25%;
+                left:70%;
+                width:80vw;
+                padding:20px;
+                background:#57574a;
+                color:white;
+                letter-spacing:0.1rem;
+                height:70px;
+            }
+            form {
+                display: grid;
+                position:relative;
+                top:100px;
+                left:63.5%;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                margin: 0;
+                padding-bottom:20px;
+                width:100vw;
+            }
+            .form-group{
+                width:45vw;
+            }
+      }
+      button {
+        width:100px;
+    }
+
     `;
 
     export default UPIComponent
