@@ -15,7 +15,7 @@ const Hero = () => {
         <h1>Endless Posiblities<br />
             With Every Click</h1>
         <p>
-            Et adipisicing consectetur aliquip mollit minim proident ex in dolor cillum aute consectetur. Dolore reprehenderit do commodo amet exercitation fugiat culpa. Sunt ea laboris officia cillum. Sint velit proident tempor elit est. Commodo elit enim dolor pariatur veniam voluptate labore nisi.
+        Explore handpicked nightwear, panties, and bras for your comfort and style. Luxurious fabrics, perfect fit, and unbeatable quality. Your confidence, your choice.
         </p>
         <Link to='/products' className='btn1 hero-btn' style={{textDecoration:'none', color:'black'}}>Shop Now</Link>
     </article>
