@@ -313,8 +313,8 @@
         // overflow:hidden;
         .PayButton{
                 position:relative;
-                // top:100%;
-                padding-top:50%;
+                top:100px;
+                // padding-top:50px;
                 left:77%;
                 width:80vw;
                 padding:20px;
