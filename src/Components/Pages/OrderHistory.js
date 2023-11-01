@@ -36,10 +36,10 @@ const OrderHistory = () => {
       loadProducts();
     }, [userId])
     function truncateText(text, maxLength) {
-      if (text.length <= maxLength) {
+      if (text && text.length <= maxLength) {
         return text;
       }
-      return text.slice(0, maxLength) + '...';
+      return text ? text.slice(0, maxLength) + '...' : '';
     }
   return (
     <div style={{display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -81,7 +81,8 @@ const OrderHistory = () => {
                 </ul>
               </div>
             ))
-          )}
+          )
+          }
         
       </div>
       </div>
