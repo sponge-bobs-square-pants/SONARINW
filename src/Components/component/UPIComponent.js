@@ -378,7 +378,7 @@
         position:relative;
         left:100px;
         top:250px;
-        // overflow:hidden;
+        overflowX:hidden;
         .PayButton{
                 position:relative;
                 top:100px;
