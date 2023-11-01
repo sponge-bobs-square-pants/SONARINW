@@ -284,7 +284,7 @@
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 4px;
-        // width:100%;
+        width:70%;
     }
 
     input[readonly] {
@@ -300,212 +300,80 @@
         border-radius: 4px;
         cursor: pointer;
     }
-    @media only screen 
-    and (device-width : 375px) 
-    and (device-height : 812px) 
-    and (-webkit-device-pixel-ratio : 3) { 
-        position:relative;
-        left:100px;
-        top:250px;
-        .PayButton{
-            position:relative;
-            top:100px;
-            // padding-top:50px;
-            left:90%;
-            width:80vw;
-            padding:20px;
-            background:red;
-            color:white;
-            letter-spacing:0.1rem;
-            height:70px;
-        }
-        form {
-            display: grid;
-            position:relative;
-            top:100px;
-            left:77%;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 0;
-            padding-bottom:20px;
-            width:100vw;
-        }
-        .form-group{
-            width:45vw;
-        }
-    }
+    
     @media (max-width: 768px) {
         form {
           grid-template-columns: 1fr;
         }
       }
 
-      //iPhone X, iPhone XS, iPhone 11, iPhone 12, and similar models
-      @media only screen and (max-width: 812px) {
-        position:relative;
-        left:100px;
-        top:250px;
-        .PayButton{
-            position:relative;
-            top:100px;
-            // padding-top:50px;
-            left:90%;
-            width:80vw;
-            padding:20px;
-            background:#57574a;
-            color:white;
-            letter-spacing:0.1rem;
-            height:70px;
-        }
-        form {
-            display: grid;
-            position:relative;
-            top:100px;
-            left:77%;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 0;
-            padding-bottom:20px;
-            width:100vw;
-        }
-        .form-group{
-            width:45vw;
-        }
-      }
-
-      //iPhone SE and iPhone 8.
-      @media only screen and (max-width: 375px) {
-        position:relative;
-        left:100px;
-        top:250px;
-        .PayButton{
-            position:relative;
-            top:100px;
-            // padding-top:50px;
-            left:85%;
-            width:80vw;
-            padding:20px;
-            background:#57574a;
-            color:white;
-            letter-spacing:0.1rem;
-            height:70px;
-        }
-        form {
-            display: grid;
-            position:relative;
-            top:100px;
-            left:77%;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 0;
-            padding-bottom:20px;
-            width:100vw;
-        }
-        .form-group{
-            width:45vw;
-        }
-
-    }
-
-    //iphone big models such as plus and max for landscape mode
-    @media only screen and (max-height: 375px) and (orientation: landscape) {
-        position:relative;
-        left:100px;
-        top:250px;
-        .PayButton{
-            position:relative;
-            top:100px;
-            // padding-top:50px;
-            left:85%;
-            width:80vw;
-            padding:20px;
-            background:#57574a;
-            color:white;
-            letter-spacing:0.1rem;
-            height:70px;
-        }
-        form {
-            display: grid;
-            position:relative;
-            top:100px;
-            left:77%;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 0;
-            padding-bottom:20px;
-            width:100vw;
-        }
-        .form-group{
-            width:45vw;
-        }
-    }
-
-    /* Common Android smartphones */
-    @media only screen and (max-width: 768px) {
-        position:relative;
-        left:100px;
-        top:250px;
-        .PayButton{
-            position:relative;
-            top:100px;
-            // padding-top:50px;
-            left:70%;
-            width:80vw;
-            padding:20px;
-            background:#57574a;
-            color:white;
-            letter-spacing:0.1rem;
-            height:70px;
-        }
-        form {
-            display: grid;
-            position:relative;
-            top:100px;
-            left:63.3%;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 0;
-            padding-bottom:20px;
-            width:100vw;
-        }
-        .form-group{
-            width:45vw;
-        }
-    }
-
-
-    // @media (max-width: 992px) {
+    // /* Common Android smartphones */
+    // @media only screen and (max-width: 768px) {
     //     position:relative;
     //     left:100px;
     //     top:250px;
-    //     // overflow:hidden;
     //     .PayButton{
-    //             position:relative;
-    //             top:100px;
-    //             // padding-top:50px;
-    //             left:85%;
-    //             width:80vw;
-    //             padding:20px;
-    //             background:#57574a;
-    //             color:white;
-    //             letter-spacing:0.1rem;
-    //             height:70px;
-    //         }
-    //         form {
-    //             display: grid;
-    //             position:relative;
-    //             top:100px;
-    //             left:77%;
-    //             grid-template-columns: 1fr 1fr;
-    //             gap: 10px;
-    //             margin: 0;
-    //             padding-bottom:20px;
-    //             width:100vw;
-    //         }
-    //         .form-group{
-    //             width:45vw;
-    //         }
-    //   }
+    //         position:relative;
+    //         top:100px;
+    //         // padding-top:50px;
+    //         left:71%;
+    //         width:80vw;
+    //         padding:20px;
+    //         background:#57574a;
+    //         color:white;
+    //         letter-spacing:0.1rem;
+    //         height:70px;
+    //     }
+    //     form {
+    //         display: grid;
+    //         position:relative;
+    //         top:100px;
+    //         left:63.3%;
+    //         grid-template-columns: 1fr 1fr;
+    //         gap: 10px;
+    //         margin: 0;
+    //         padding-bottom:20px;
+    //         width:100vw;
+    //     }
+    //     .form-group{
+    //         width:45vw;
+    //     }
+    // }
+
+
+    @media (max-width: 992px) {
+        position:relative;
+        left:100px;
+        top:250px;
+        // overflow:hidden;
+        .PayButton{
+                position:relative;
+                top:100px;
+                // padding-top:50px;
+                left:75%;
+                width:80vw;
+                padding:20px;
+                background:#57574a;
+                color:white;
+                letter-spacing:0.1rem;
+                height:70px;
+            }
+            form {
+                // overflow:hidden;
+                display: grid;
+                position:relative;
+                top:100px;
+                left:70%;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                margin: 0;
+                padding-bottom:20px;
+                width:100vw;
+            }
+            .form-group{
+                width:45vw;
+            }
+      }
       button {
         width:100px;
     }
