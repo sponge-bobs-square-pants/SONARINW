@@ -305,39 +305,69 @@
           grid-template-columns: 1fr;
         }
       }
-
-    @media (max-width: 992px) {
+      @media only screen and (max-width: 812px) {
         position:relative;
         left:100px;
         top:250px;
-        // overflow:hidden;
         .PayButton{
-                position:relative;
-                top:100px;
-                // padding-top:50px;
-                left:85%;
-                width:80vw;
-                padding:20px;
-                background:#57574a;
-                color:white;
-                letter-spacing:0.1rem;
-                height:70px;
-            }
-            form {
-                display: grid;
-                position:relative;
-                top:100px;
-                left:77%;
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-                margin: 0;
-                padding-bottom:20px;
-                width:100vw;
-            }
-            .form-group{
-                width:45vw;
-            }
+            position:relative;
+            top:100px;
+            // padding-top:50px;
+            left:85%;
+            width:80vw;
+            padding:20px;
+            background:#57574a;
+            color:white;
+            letter-spacing:0.1rem;
+            height:70px;
+        }
+        form {
+            display: grid;
+            position:relative;
+            top:100px;
+            left:77%;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 0;
+            padding-bottom:20px;
+            width:100vw;
+        }
+        .form-group{
+            width:45vw;
+        }
       }
+    // @media (max-width: 992px) {
+    //     position:relative;
+    //     left:100px;
+    //     top:250px;
+    //     // overflow:hidden;
+    //     .PayButton{
+    //             position:relative;
+    //             top:100px;
+    //             // padding-top:50px;
+    //             left:85%;
+    //             width:80vw;
+    //             padding:20px;
+    //             background:#57574a;
+    //             color:white;
+    //             letter-spacing:0.1rem;
+    //             height:70px;
+    //         }
+    //         form {
+    //             display: grid;
+    //             position:relative;
+    //             top:100px;
+    //             left:77%;
+    //             grid-template-columns: 1fr 1fr;
+    //             gap: 10px;
+    //             margin: 0;
+    //             padding-bottom:20px;
+    //             width:100vw;
+    //         }
+    //         .form-group{
+    //             width:45vw;
+    //         }
+    //   }
       button {
         width:100px;
     }
