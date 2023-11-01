@@ -315,7 +315,7 @@
                 position:relative;
                 top:100px;
                 // padding-top:50px;
-                left:77%;
+                left:80%;
                 width:80vw;
                 padding:20px;
                 background:#57574a;
