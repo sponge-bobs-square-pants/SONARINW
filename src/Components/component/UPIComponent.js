@@ -306,10 +306,38 @@
         }
       }
       @media only screen and (device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {
-        /* Your CSS for iPhone 13 Pro Max in portrait mode */
+        position:relative;
+        left:100px;
+        top:250px;
+        .PayButton{
+            position:relative;
+            top:100px;
+            // padding-top:50px;
+            left:85%;
+            width:80vw;
+            padding:20px;
+            background:#57574a;
+            color:white;
+            letter-spacing:0.1rem;
+            height:70px;
+        }
+        form {
+            display: grid;
+            position:relative;
+            top:100px;
+            left:77%;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 0;
+            padding-bottom:20px;
+            width:100vw;
+        }
+        .form-group{
+            width:45vw;
+        }
     }
       //iPhone X, iPhone XS, iPhone 11, iPhone 12, and similar models
-      @media only screen and (max-width: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {
+      @media only screen and (max-width: 812px) {
         position:relative;
         left:100px;
         top:250px;
