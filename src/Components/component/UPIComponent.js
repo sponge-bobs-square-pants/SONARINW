@@ -313,8 +313,8 @@
         // overflow:hidden;
         .PayButton{
                 position:relative;
-                top:25%;
-                left:70%;
+                top:30%;
+                left:80%;
                 width:80vw;
                 padding:20px;
                 background:#57574a;
@@ -326,7 +326,7 @@
                 display: grid;
                 position:relative;
                 top:100px;
-                left:63.5%;
+                left:80%;
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
                 margin: 0;

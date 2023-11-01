@@ -27,7 +27,7 @@ const Hero = () => {
 }
 
 const Wrapper = styled.section`
-  min-height: 60vh;
+  min-height: 90vh;
   display: grid;
   place-items: center;
   .img-container {
@@ -40,6 +40,12 @@ const Wrapper = styled.section`
     margin-bottom: 2rem;
     color: var(--clr-grey-5);
     font-size: 1rem;
+  }
+  @media(max-width: 992px){
+    .hero-btn{
+      margin-bottom:20px;
+      // padding-bottom:50px;
+    }
   }
   @media (min-width: 992px) {
     height: calc(100vh - 5rem);
@@ -54,6 +60,8 @@ const Wrapper = styled.section`
     .hero-btn {
       padding: 0.75rem 1.5rem;
       font-size: 1rem;
+      // padding-bottom:30px;
+      // margin-bottom:300px;
     }
     .img-container {
       display: block;

@@ -5,8 +5,9 @@ const Contact = () => {
   return <Wrapper className='section-center'>
     <h2>Join our newsletter and get 10% off</h2>
     <div className='content'>
-      <p>Subscribe to our newsletter and unlock an exclusive 10% discount on your next purchase. Be the first to receive updates on our latest products, special offers, and fashion tips. 
-        Don't miss out on this opportunity to elevate your style and savings.Ready to stay in the loop? Simply enter your email address below to join our newsletter and enjoy the benefits of being a part of our fashion community.</p>
+      <p>Be the first to receive updates on our latest products, special offers, and fashion tips. 
+        <br />
+        Ready to stay in the loop? Simply enter your email address below to join our newsletter and enjoy the benefits of being a part of our fashion community.</p>
     <form className='contact-form'>
       <input type='email' className='form-input' placeholder='Enter Your Email'>
       </input>

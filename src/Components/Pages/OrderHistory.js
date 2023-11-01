@@ -47,9 +47,8 @@ const OrderHistory = () => {
      <div style={{flex: 1,background:'white', paddingLeft:'5vw', paddingTop:'50px',paddingRight:'5vw', paddingBottom:'50px'}}>
      <div style={{background:'white', padding:'10px'}}>
      {orderItems.length === 0 ? (
-           
             // <div style={{display:'grid', placeItems: 'center', height: '100%' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '60vh' }}>
                <p>No orders found</p>
                {/* <button onClick='/Products'></button> */}
                <Link to='/Products' style={{background:'black', padding:'15px',paddingLeft:'30px',paddingRight:'30px',

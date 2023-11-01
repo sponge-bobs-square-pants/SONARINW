@@ -15,10 +15,10 @@ const CheckoutPage = () => {
   return <main>
     <Nav/>
     <PageHero title="Checkout" />
-    <Wrapper className='page' style={{overflow:'hidden', width:'100px'}}>
+    <Wrapper className='page' style={{overflow:'hidden', width:'120px',}}>
       {cart.length < 1 ? <div className='empty'>
         <h2>Your Cart Is empty</h2>
-        <Link to='/products' className='btn' style={{textDecoration:'none'}}>
+        <Link to='/products' className='btn' style={{textDecoration:'none', fontWeight:'bolder'}}>
           Fill It
         </Link>
       </div>: 

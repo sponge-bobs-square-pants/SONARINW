@@ -441,6 +441,8 @@ export const FilterProvider = ({ children }) => {
            dispatch({ type: SORT_PRODUCTS, payload: products });
            dispatch({type:UPDATE_FILTERS, payload:{name, value}});
            dispatch({type:FILTER_PRODUCTS, payload:products}) 
+           
+          //  dispatch({type:UPDATE_PAGE, payload:page})
             // console.log(products);
           }
           else {
