@@ -341,7 +341,43 @@
     // }
 
 
-    @media (max-width: 992px) {
+    // @media (max-width: 992px) {
+    //     position:relative;
+    //     left:100px;
+    //     top:250px;
+    //     // overflow:hidden;
+    //     .PayButton{
+    //             position:relative;
+    //             top:100px;
+    //             // padding-top:50px;
+    //             left:75%;
+    //             width:80vw;
+    //             padding:20px;
+    //             background:#57574a;
+    //             color:white;
+    //             letter-spacing:0.1rem;
+    //             height:70px;
+    //         }
+    //         form {
+    //             // overflow:hidden;
+    //             display: grid;
+    //             position:relative;
+    //             top:100px;
+    //             left:70%;
+    //             grid-template-columns: 1fr 1fr;
+    //             gap: 10px;
+    //             margin: 0;
+    //             padding-bottom:20px;
+    //             width:100vw;
+    //         }
+    //         .form-group{
+    //             width:45vw;
+    //         }
+    //   }
+      @media only screen 
+    and (width: 428px) 
+    and (height: 926px) 
+    and (-webkit-device-pixel-ratio: 3) { 
         position:relative;
         left:100px;
         top:250px;
@@ -350,7 +386,7 @@
                 position:relative;
                 top:100px;
                 // padding-top:50px;
-                left:75%;
+                left:90%;
                 width:80vw;
                 padding:20px;
                 background:#57574a;
@@ -363,7 +399,7 @@
                 display: grid;
                 position:relative;
                 top:100px;
-                left:70%;
+                left:90%;
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
                 margin: 0;
@@ -373,7 +409,12 @@
             .form-group{
                 width:45vw;
             }
-      }
+    }
+
+
+
+
+
       button {
         width:100px;
     }
