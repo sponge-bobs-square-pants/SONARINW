@@ -314,7 +314,7 @@
         .PayButton{
                 position:relative;
                 top:50%;
-                left:75%;
+                left:77%;
                 width:80vw;
                 padding:20px;
                 background:#57574a;
@@ -326,7 +326,7 @@
                 display: grid;
                 position:relative;
                 top:100px;
-                left:75%;
+                left:77%;
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
                 margin: 0;
