@@ -300,7 +300,7 @@
         border-radius: 4px;
         cursor: pointer;
     }
-    @media (max-device-width: 480px){
+    @media (max-width: 480px){
         .PayButton{
             position:relative;
             top:100px;
