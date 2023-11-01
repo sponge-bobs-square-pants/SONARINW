@@ -300,7 +300,13 @@
         border-radius: 4px;
         cursor: pointer;
     }
-    @media (max-width: 480px){
+    @media only screen 
+    and (device-width : 375px) 
+    and (device-height : 812px) 
+    and (-webkit-device-pixel-ratio : 3) { 
+        position:relative;
+        left:100px;
+        top:250px;
         .PayButton{
             position:relative;
             top:100px;
@@ -308,7 +314,7 @@
             left:90%;
             width:80vw;
             padding:20px;
-            background:#57574a;
+            background:red;
             color:white;
             letter-spacing:0.1rem;
             height:70px;
