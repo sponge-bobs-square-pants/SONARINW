@@ -375,8 +375,8 @@
     //         }
     //   }
       @media only screen 
-    and (width: 428px) 
-    and (height: 926px) 
+    and (device-width: 430px) 
+    and (device-height: 932px) 
     and (-webkit-device-pixel-ratio: 3) { 
         position:relative;
         left:100px;
