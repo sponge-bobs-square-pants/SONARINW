@@ -383,7 +383,7 @@
                 position:relative;
                 top:100px;
                 // padding-top:50px;
-                left:85%;
+                left:83%;
                 width:80vw;
                 padding:20px;
                 background:#57574a;
