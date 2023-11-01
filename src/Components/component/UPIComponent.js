@@ -305,8 +305,11 @@
           grid-template-columns: 1fr;
         }
       }
+      @media only screen and (device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {
+        /* Your CSS for iPhone 13 Pro Max in portrait mode */
+    }
       //iPhone X, iPhone XS, iPhone 11, iPhone 12, and similar models
-      @media only screen and (max-width: 812px) {
+      @media only screen and (max-width: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {
         position:relative;
         left:100px;
         top:250px;
