@@ -341,7 +341,7 @@
     // }
 
 
-    @media (max-width: 992px) {
+    @media (min-width:320px) {
         position:relative;
         left:100px;
         top:250px;
@@ -364,6 +364,39 @@
                 position:relative;
                 top:100px;
                 left:70%;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                margin: 0;
+                padding-bottom:20px;
+                width:100vw;
+            }
+            .form-group{
+                width:45vw;
+            }
+      }
+      @media (min-width:428px) {
+        position:relative;
+        left:100px;
+        top:250px;
+        // overflow:hidden;
+        .PayButton{
+                position:relative;
+                top:100px;
+                // padding-top:50px;
+                left:85%;
+                width:80vw;
+                padding:20px;
+                background:#57574a;
+                color:white;
+                letter-spacing:0.1rem;
+                height:70px;
+            }
+            form {
+                // overflow:hidden;
+                display: grid;
+                position:relative;
+                top:100px;
+                left:80%;
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
                 margin: 0;
