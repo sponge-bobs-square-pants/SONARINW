@@ -74,7 +74,10 @@ const OrderHistory = () => {
                             Amount: {item.amount}
                           </Link>
                         </div>
-                        <button className='StatusButton'>Order Status</button>
+                        <div style={{display:'grid', gap:'10px'}}>
+                        <button className='StatusButton' >Order Status</button>
+                        <button className='StatusButton'>Delivery</button>
+                        </div>
                       </article>
                     </Wrapper>
                   ))}
@@ -101,16 +104,21 @@ const Wrapper = styled.section`
   .container{
     display:flex;
     height:200px;
+    align-items: flex-start;
+    // margin-left: -50px;
+    // justify-content: flex-end;
+    
   }
   .show-on-mobile {
     display: block;
   }
   .StatusButton{
+    // display:grid;
     padding-left:70px;
     padding-right:70px;
     padding-bottom:10px;
     padding-top:10px;
-    align-self:start
+    align-self: flex-start;
   }
   .description{
     display:block;

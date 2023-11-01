@@ -300,6 +300,34 @@
         border-radius: 4px;
         cursor: pointer;
     }
+    @media (max-device-width: 480px){
+        .PayButton{
+            position:relative;
+            top:100px;
+            // padding-top:50px;
+            left:90%;
+            width:80vw;
+            padding:20px;
+            background:#57574a;
+            color:white;
+            letter-spacing:0.1rem;
+            height:70px;
+        }
+        form {
+            display: grid;
+            position:relative;
+            top:100px;
+            left:77%;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 0;
+            padding-bottom:20px;
+            width:100vw;
+        }
+        .form-group{
+            width:45vw;
+        }
+    }
     @media (max-width: 768px) {
         form {
           grid-template-columns: 1fr;
