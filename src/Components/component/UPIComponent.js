@@ -305,6 +305,7 @@
           grid-template-columns: 1fr;
         }
       }
+      //iPhone X, iPhone XS, iPhone 11, iPhone 12, and similar models
       @media only screen and (max-width: 812px) {
         position:relative;
         left:100px;
@@ -336,6 +337,52 @@
             width:45vw;
         }
       }
+
+      //iPhone SE and iPhone 8.
+      @media only screen and (max-width: 375px) {
+        /* Your CSS for iPhones in portrait mode */
+
+    }
+
+    //iphone big models such as plus and max for landscape mode
+    @media only screen and (max-height: 375px) and (orientation: landscape) {
+        /* Your CSS for iPhones in landscape mode */
+    }
+
+    /* Common Android smartphones */
+    @media only screen and (max-width: 768px) {
+        position:relative;
+        left:100px;
+        top:250px;
+        .PayButton{
+            position:relative;
+            top:100px;
+            // padding-top:50px;
+            left:70%;
+            width:80vw;
+            padding:20px;
+            background:#57574a;
+            color:white;
+            letter-spacing:0.1rem;
+            height:70px;
+        }
+        form {
+            display: grid;
+            position:relative;
+            top:100px;
+            left:63.3%;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 0;
+            padding-bottom:20px;
+            width:100vw;
+        }
+        .form-group{
+            width:45vw;
+        }
+    }
+
+
     // @media (max-width: 992px) {
     //     position:relative;
     //     left:100px;
