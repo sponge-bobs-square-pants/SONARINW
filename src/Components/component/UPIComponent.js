@@ -305,7 +305,7 @@
             grid-template-columns: 1fr;
           }
           position:absolute;
-          left:-85px;
+          left:-95px;
           top:250px;
         //   overflow-y:auto;
           // overflow:hidden;
