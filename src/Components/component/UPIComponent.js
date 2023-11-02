@@ -204,7 +204,7 @@
         return (
             <FormWrapper>
             {/* <h2>Checkout Form</h2> */}
-            <form>
+            <form style={{paddingRight:'0px', marginRight:'0px'}}>
             <div className="form-group">
                 <label>Total Price</label>
                 <input type="text" value={formatPrice(amount)} readOnly />
@@ -271,11 +271,13 @@
         margin: 0 auto;
         padding-bottom:20px;
         // margin-bottom:50px; 
+        
     }
 
     .form-group {
         display: flex;
         flex-direction: column;
+        
     }
 
     label {
@@ -312,6 +314,8 @@
         //   overflow-y:hidden;
           width:100vw;
         //   overflow:hidden;
+        // padding-right:0px;
+        // margin-right:0px;
           .PayButton{
                   position:relative;
                   top:100px;
@@ -325,6 +329,7 @@
                   height:70px;
               }
               form {
+                background:red;
                 //   overflow:hidden;
                   display: grid;
                   position:relative;
@@ -334,6 +339,8 @@
                   gap: 10px;
                   margin: 0;
                   padding-bottom:20px;
+                  padding-right:0px;
+                  margin-right:0px;
                   width:100vw;
               }
               .form-group{
