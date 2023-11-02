@@ -1,6 +1,7 @@
     import axios from 'axios';
     import React, { useState, useEffect } from 'react'
     import { useCartContext } from '../context/CartContext';
+    import '../Pages/MainPage.css'
     import styled from 'styled-components';
     import { formatPrice } from './utils/helpers';
     import { useUserContext } from '../context/UserContext';
