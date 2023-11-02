@@ -313,7 +313,7 @@
                 position:relative;
                 top:100px;
                 // padding-top:50px;
-                left:75%;
+                left:73%;
                 width:80vw;
                 padding:20px;
                 background:#57574a;
@@ -326,7 +326,7 @@
                 display: grid;
                 position:relative;
                 top:100px;
-                left:70%;
+                left:66%;
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
                 margin: 0;
