@@ -309,10 +309,10 @@
             grid-template-columns: 1fr;
           }
           position:absolute;
-          left:-105px;
+          left:-82px;
           top:250px;
         //   overflow-y:hidden;
-          width:100vw;
+          width:90vw;
         //   overflow:hidden;
         // padding-right:0px;
         // margin-right:0px;
