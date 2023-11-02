@@ -305,11 +305,11 @@
             grid-template-columns: 1fr;
           }
           position:absolute;
-          left:155px;
+          left:-85px;
           top:250px;
-          overflow-y:hidden;
+        //   overflow-y:hidden;
           width:100vw;
-          overflow:hidden;
+        //   overflow:hidden;
           .PayButton{
                   position:relative;
                   top:100px;
