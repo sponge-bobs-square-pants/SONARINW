@@ -284,7 +284,7 @@
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 4px;
-        width:70%;
+        width:80%;
     }
 
     input[readonly] {
@@ -305,43 +305,6 @@
         form {
           grid-template-columns: 1fr;
         }
-      }
-
-    // /* Common Android smartphones */
-    // @media only screen and (max-width: 768px) {
-    //     position:relative;
-    //     left:100px;
-    //     top:250px;
-    //     .PayButton{
-    //         position:relative;
-    //         top:100px;
-    //         // padding-top:50px;
-    //         left:71%;
-    //         width:80vw;
-    //         padding:20px;
-    //         background:#57574a;
-    //         color:white;
-    //         letter-spacing:0.1rem;
-    //         height:70px;
-    //     }
-    //     form {
-    //         display: grid;
-    //         position:relative;
-    //         top:100px;
-    //         left:63.3%;
-    //         grid-template-columns: 1fr 1fr;
-    //         gap: 10px;
-    //         margin: 0;
-    //         padding-bottom:20px;
-    //         width:100vw;
-    //     }
-    //     .form-group{
-    //         width:45vw;
-    //     }
-    // }
-
-
-    @media (min-width:320px) {
         position:relative;
         left:100px;
         top:250px;
@@ -374,43 +337,76 @@
                 width:45vw;
             }
       }
-      @media (min-width:428px) {
-        position:relative;
-        left:100px;
-        top:250px;
-        overflowX:hidden;
-        .PayButton{
-                position:relative;
-                top:100px;
-                // padding-top:50px;
-                left:83%;
-                width:80vw;
-                padding:20px;
-                background:#57574a;
-                color:white;
-                letter-spacing:0.1rem;
-                height:70px;
-            }
-            form {
-                // overflow:hidden;
-                display: grid;
-                position:relative;
-                top:100px;
-                left:80%;
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-                margin: 0;
-                padding-bottom:20px;
-                width:100vw;
-            }
-            .form-group{
-                width:45vw;
-            }
-      }
+    // @media (min-width:320px) {
+    //     position:relative;
+    //     left:100px;
+    //     top:250px;
+    //     // overflow:hidden;
+    //     .PayButton{
+    //             position:relative;
+    //             top:100px;
+    //             // padding-top:50px;
+    //             left:75%;
+    //             width:80vw;
+    //             padding:20px;
+    //             background:#57574a;
+    //             color:white;
+    //             letter-spacing:0.1rem;
+    //             height:70px;
+    //         }
+    //         form {
+    //             // overflow:hidden;
+    //             display: grid;
+    //             position:relative;
+    //             top:100px;
+    //             left:70%;
+    //             grid-template-columns: 1fr 1fr;
+    //             gap: 10px;
+    //             margin: 0;
+    //             padding-bottom:20px;
+    //             width:100vw;
+    //         }
+    //         .form-group{
+    //             width:45vw;
+    //         }
+    //   }
+    //   @media (min-width:428px) {
+    //     position:relative;
+    //     left:100px;
+    //     top:250px;
+    //     overflowX:hidden;
+    //     .PayButton{
+    //             position:relative;
+    //             top:100px;
+    //             // padding-top:50px;
+    //             left:83%;
+    //             width:80vw;
+    //             padding:20px;
+    //             background:#57574a;
+    //             color:white;
+    //             letter-spacing:0.1rem;
+    //             height:70px;
+    //         }
+    //         form {
+    //             // overflow:hidden;
+    //             display: grid;
+    //             position:relative;
+    //             top:100px;
+    //             left:80%;
+    //             grid-template-columns: 1fr 1fr;
+    //             gap: 10px;
+    //             margin: 0;
+    //             padding-bottom:20px;
+    //             width:100vw;
+    //         }
+    //         .form-group{
+    //             width:45vw;
+    //         }
+    //   }
 
-      button {
-        width:100px;
-    }
+    //   button {
+    //     width:100px;
+    // }
 
     `;
 
