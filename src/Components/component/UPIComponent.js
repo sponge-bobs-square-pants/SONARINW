@@ -300,13 +300,14 @@
         border-radius: 4px;
         cursor: pointer;
     }
-    @media(max-width: 992px){
+    @media(max-width: 480px){
         form {
             grid-template-columns: 1fr;
           }
-          position:relative;
-          left:100px;
+          position:absolute;
+          left:-85px;
           top:250px;
+        //   overflow-y:auto;
           // overflow:hidden;
           .PayButton{
                   position:relative;
@@ -321,7 +322,7 @@
                   height:70px;
               }
               form {
-                  // overflow:hidden;
+                //   overflow:hidden;
                   display: grid;
                   position:relative;
                   top:100px;
