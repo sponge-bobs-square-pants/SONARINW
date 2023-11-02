@@ -245,6 +245,7 @@
         )
     }
     const FormWrapper = styled.div`
+    width:100%;
     position:relative;
     left:700px;
     top:60px;
