@@ -117,7 +117,16 @@
         };
 
         const handlePayment = async () => {
-            console.log(phone, orderID,email,address,pincode,state,city,amount, name, userId);
+            function generateTransactionID() {
+                const timestamp= Date.now();
+                const RandomNum = Math.floor(Math.random() * 1000000)
+                const MerchantPrefix = 'K';
+                const transactionID = `SONARIONLINE${MerchantPrefix}${timestamp}${RandomNum}`
+                return transactionID
+            }
+            const transactionID = generateTransactionID();
+            console.log(phone, orderID,email,address,pincode,state,city,amount, name, userId, transactionID);
+
             const data = {
                 phone,
                 orderID,
@@ -129,6 +138,7 @@
                 amount,
                 name,
                 userId,
+                transactionID,
             }
             try {
                 const response = await axios.post(`${process.env.REACT_APP_GENERAL_ROUTE}/razorpay`, data)
