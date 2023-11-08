@@ -26,7 +26,7 @@
         const {myUser, userId} = useUserContext();
         const name = myUser ? myUser.name : 'User Name Not Available';
         // console.log(name);
-        console.log(userId);
+        // console.log(userId);
         const [amount, setAmount] = useState(0);
         // const [currency, setCurrency] = useState('INR');
         const [orderID, setOrderID] = useState('');
@@ -37,14 +37,14 @@
         const [city, setCity] = useState(''); 
         const [isFormComplete, setFormComplete] = useState(false);
         const [isButtonDisabled, setButtonDisabled] = useState(true);
-
+        const [phone, setPhone] = useState('');
         const key = process.env.REACT_APP_RAZOR_PAY_KEY
         const secureKey = process.env.REACT_APP_SECURE_KEY
         // console.log(key);
         const {cart, shipping_fee, totalAmount, clearCart} = useCartContext();
         // console.log(cart);
         // console.log(typeof(cart[0].Price), 'This is cart');
-        console.log(cart, 'This is cart');
+        // console.log(cart, 'This is cart');
         const checkFormCompleteness = () => {
             // You can define your own logic to check form completeness here.
             // For example, check if all required fields are filled.
@@ -53,8 +53,21 @@
             setButtonDisabled(!isComplete);
           };
 
-
+        const getAmount = async() => {
+            try {
+                const response = await axios.post(`${process.env.REACT_APP_GENERAL_ROUTE}/razorpaydata`, cart)
+                // console.log(response.data.amount, response.data.order_id);
+                setOrderID(response.data.order_id);
+                setAmount(response.data.amount);
+            } catch (error) {
+                console.log('Get amount error');
+            }
+        }
+        useEffect(() => {
+            getAmount();
+        }, [])
         const handleFormSubmit = async () => {
+            
             // console.log(orderID, 'formsubmit');
             // console.log(cart, 'This is the cart value');
             try {
@@ -77,6 +90,7 @@
                 cart,
                 isPaymentSuccessful:false,
                 userId,
+                phoneNumber:phone,
             };
             
             // Send the form data to your server's API endpoint
@@ -92,95 +106,43 @@
             setPincode('');
             setState('');
             setCity('');
+            setPhone('');
+            setAmount('');
+            clearCart();
             // Reset other form fields as needed
         
             } catch (error) {
             console.log(error.response);
             }
         };
-        // console.log(cart, 'After handle cart');
-        const createPaymentIntent = async () => {
-            // console.log(cart);
-            // console.log('hello');
-            // console.log(orderID, 'payment intent');
-            try {
-                const reqData = {
-                    cart:cart,
-                    shipping_fee:shipping_fee,
-                }
-            const {data} = await axios.post(`${process.env.REACT_APP_GENERAL_ROUTE}/razorpaydata`, reqData)
-            // console.log(data.clientSecret);
-            // console.log(data.totalAmount);
-            const totalAmount = parseFloat(data.totalAmount);
-            setAmount(totalAmount)
-            razorpay();
-            } 
-            catch (error) {
-            console.log(error.response);
-            }
-        }
-        useEffect(() => {
-            createPaymentIntent();
-            // eslint-disable-next-line
-        },[])
 
-        const razorpay = async () => {
-        
-            // console.log(orderID, 'razor pay');
-            const result = await razorpayScript('https://checkout.razorpay.com/v1/checkout.js')
-            if(!result){
-                alert('RazorPay SDK failed to load. Kindly enable scripts or check your internet connection');
-                return;
+        const handlePayment = async () => {
+            console.log(phone, orderID,email,address,pincode,state,city,amount, name, userId);
+            const data = {
+                phone,
+                orderID,
+                email,
+                address,
+                pincode,
+                state,
+                city,
+                amount,
+                name,
+                userId,
             }
-            if(!amount){
-            const data = await fetch(`${process.env.REACT_APP_GENERAL_ROUTE}/razorpay`, {method: 'POST'}).then((t) => t.json())
-            setAmount(data.amount)
-            // setCurrency(data.currency)
-            setOrderID(data.order_id)
-            // console.log(data, orderID);
-            // console.log(data.amount, data.currency, data.order_id);s
-        }
-            if(amount > 0) {
-            var options = {
-                "key":key,
-                "amount": amount,
-                "currency": 'INR',
-                "name": "Sonari Night Wear", 
-                "description": "Transation",
-                "image": "https://res.cloudinary.com/dfovdz88b/image/upload/v1697829823/psnbqu07atzhxmtcgtxp.jpg",
-                "order_id": orderID,
-                // "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
-                // "prefill": { 
-                //     "name": "Gaurav Kumar", 
-                //     "email": "gaurav.kumar@example.com",
-                //     "contact": "9000090000" 
-                // },
-                "notes": {
-                    "address": "Sonari Night Wear Vadodara"
-                },
-                "theme": {
-                    "color": "#000000",
-                    // hide_topbar:true,
-                },
-                notify:{
-                    sms: true,
-                    email:true,
-                },
-                handler: function(response){
-                    if(response.razorpay_payment_id){
-                        // alert('Payment successful')
-                        clearCart();
-                    }
-                    else {
-                        alert('Payment failed. Please try again')
-                    }
-                }
-            };
-            const rzp1 = new window.Razorpay(options);
-            rzp1.open()
-            // console.log(orderID, 'razor pay end');
-        }
-        }
+            try {
+                const response = await axios.post(`${process.env.REACT_APP_GENERAL_ROUTE}/razorpay`, data)
+                window.location.href = response.data
+                console.log(response.data);
+            } catch (error) {
+               console.log(error, 'Payment error'); 
+            }
+            
+            handleFormSubmit();
+            // console.log(phone, orderID,email,address,pincode,state,city,amount, name);
+
+        };
+
         const handleEmailChange = (e) => {
             setEmail(e.target.value);
         };
@@ -200,7 +162,11 @@
         const handleCityChange = (e) => {
             setCity(e.target.value);
         };
+        const handlePhoneChange = (e) => {
+            setPhone(e.target.value);
+        };
         //   console.log(address, state, city, pincode, email);
+        
         return (
             <FormWrapper>
             {/* <h2>Checkout Form</h2> */}
@@ -233,11 +199,17 @@
                 <label>City</label>
                 <input type="text" placeholder="Enter your city" value={city} onChange={handleCityChange}  onBlur={checkFormCompleteness}/>
             </div>
+            <div className="form-group">
+                <label>Phone Number</label>
+                <input type="tel" placeholder="Enter your Phone Number" value={phone} onChange={handlePhoneChange}  onBlur={checkFormCompleteness} pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
+            </div>
             </form>
             
             <button onClick={() =>{
-                razorpay();
-                handleFormSubmit();
+                // getAmount();
+                // handleFormSubmit();
+                handlePayment();
+
             }}disabled={isButtonDisabled} className='PayButton'>
                 PAY NOW
             </button>
