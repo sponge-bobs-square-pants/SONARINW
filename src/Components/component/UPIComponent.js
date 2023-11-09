@@ -106,9 +106,9 @@
         
             // Reset the form fields
             setEmail('');
-            console.log('before clear cart');
-            clearCart();
-            console.log('after clear cart');
+            // console.log('before clear cart');
+            
+            // console.log('after clear cart');
             setAddress('');
             setPincode('');
             setState('');
@@ -228,6 +228,7 @@
                 // getAmount();
                 // handleFormSubmit();
                 handlePayment();
+                clearCart();
 
             }}disabled={isButtonDisabled} className='PayButton'>
                 PAY NOW
