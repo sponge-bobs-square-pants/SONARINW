@@ -157,7 +157,7 @@
                console.log(error, 'Payment error'); 
             }
             
-            handleFormSubmit();
+            // handleFormSubmit();
             // console.log(phone, orderID,email,address,pincode,state,city,amount, name);
 
         };
@@ -226,7 +226,7 @@
             
             <button onClick={() =>{
                 // getAmount();
-                // handleFormSubmit();
+                handleFormSubmit();
                 handlePayment();
                 clearCart();
 
