@@ -56,6 +56,8 @@
         const getAmount = async() => {
             try {
                 const response = await axios.post(`${process.env.REACT_APP_GENERAL_ROUTE}/razorpaydata`, cart)
+                // const response = await axios.post(`http://localhost:5000/api/v1/razorpaydata`, cart)
+                
                 // console.log(response.data.amount, response.data.order_id);
                 setOrderID(response.data.order_id);
                 setAmount(response.data.amount);
@@ -95,6 +97,7 @@
             
             // Send the form data to your server's API endpoint
             await axios.post(`${process.env.REACT_APP_GENERAL_ROUTE}/submitForm`, formData, {headers});
+
             // await axios.post(`http://localhost:5000/api/v1/submitForm`, formData, {headers});
         
             // Optionally, you can display a success message to the user
@@ -125,6 +128,7 @@
                 return transactionID
             }
             const transactionID = generateTransactionID();
+            // console.log(typeof transactionID);
             console.log(phone, orderID,email,address,pincode,state,city,amount, name, userId, transactionID);
 
             const data = {
@@ -142,6 +146,7 @@
             }
             try {
                 const response = await axios.post(`${process.env.REACT_APP_GENERAL_ROUTE}/razorpay`, data)
+                // const response = await axios.post(`http://localhost:5000/api/v1/razorpay`, data)
                 window.location.href = response.data
                 console.log(response.data);
             } catch (error) {
