@@ -106,13 +106,14 @@
         
             // Reset the form fields
             setEmail('');
+            clearCart();
             setAddress('');
             setPincode('');
             setState('');
             setCity('');
             setPhone('');
             setAmount('');
-            clearCart();
+            
             // Reset other form fields as needed
         
             } catch (error) {
