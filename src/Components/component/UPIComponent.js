@@ -106,7 +106,9 @@
         
             // Reset the form fields
             setEmail('');
+            console.log('before clear cart');
             clearCart();
+            console.log('after clear cart');
             setAddress('');
             setPincode('');
             setState('');
