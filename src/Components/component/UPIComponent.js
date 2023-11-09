@@ -59,8 +59,9 @@
                 // const response = await axios.post(`http://localhost:5000/api/v1/razorpaydata`, cart)
                 
                 // console.log(response.data.amount, response.data.order_id);
+                const amount1 = response.data.amount * 9 / 10
                 setOrderID(response.data.order_id);
-                setAmount(response.data.amount);
+                setAmount(amount1);
             } catch (error) {
                 console.log('Get amount error');
             }
