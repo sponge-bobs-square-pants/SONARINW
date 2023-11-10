@@ -19,7 +19,7 @@ const OrderHistory = () => {
         const url=`${process.env.REACT_APP_GENERAL_ROUTE}/Order?id=${userId}`;
         try {
           const response = await axios.get(url)
-          console.log(response);
+          // console.log(response);
           if(response.status === 200){
             const {data} = response
             const array = data.cartArray

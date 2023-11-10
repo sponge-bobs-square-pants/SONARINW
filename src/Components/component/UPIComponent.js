@@ -133,7 +133,7 @@
             }
             const transactionID = generateTransactionID();
             // console.log(typeof transactionID);
-            console.log(phone, orderID,email,address,pincode,state,city,amount, name, userId, transactionID);
+            // console.log(phone, orderID,email,address,pincode,state,city,amount, name, userId, transactionID);
 
             const data = {
                 phone,
@@ -152,7 +152,7 @@
                 const response = await axios.post(`${process.env.REACT_APP_GENERAL_ROUTE}/razorpay`, data)
                 // const response = await axios.post(`http://localhost:5000/api/v1/razorpay`, data)
                 window.location.href = response.data
-                console.log(response.data);
+                // console.log(response.data);
             } catch (error) {
                console.log(error, 'Payment error'); 
             }
