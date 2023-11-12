@@ -8,18 +8,17 @@ const Sort = () => {
   const {grid_view, setGridView, setListView, sort, updateSort, all_products} = useFilterContext();
   return (
     <Wrapper>
-      <div className='btn-container'>
-        <button type='button' className={`${grid_view ? 'active' : null}`} onClick={setGridView}>
-          {/* <BsFillGridFill /> */}
-          <IoGrid  size={20} color={grid_view ? '#fff' : '#000'}/>
-        </button>
-        <div className={grid_view ? 'active' : null} onClick={setGridView}>
-        <IoGrid size={15} style={{ color: grid_view ? '#fff' : '#000' }} />
+      <div className='btn-container' style={{display:'flex'}} >
+        <div className={grid_view ? 'active' : null} onClick={setGridView}
+        style={{borderRadius:'0.5rem', border:'solid 1px black', alignItems:'center', alignContent:'center', display:'flex',
+        paddingLeft:'5px', paddingRight:'5px', paddingTop:'3px', paddingBottom:'3px'}}>
+        <IoGrid size={11} style={{ color: grid_view ? 'active' : null}} />
         </div>
-        <button type='button' className={`${!grid_view ? 'active' : null}`} onClick={setListView}>
-          {/* <BsList /> */}
-          <IoMdList />
-        </button>
+        <div className={!grid_view ? 'active' : null} onClick={setListView}
+        style={{borderRadius:'0.5rem', border:'solid 1px black', alignItems:'center', alignContent:'center', display:'flex',
+        paddingLeft:'5px', paddingRight:'7px', paddingTop:'5px', paddingBottom:'5px'}}>
+        <IoMdList size={11} style={{ color: grid_view ? 'active' : null}} />
+        </div>
       </div>
       <p className='productinfo'>{all_products.length} Products Found</p>
         <hr  className='hrline'/>
