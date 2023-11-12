@@ -105,13 +105,14 @@ const Wrapper = styled.main`
   }
   .content {
     position:relative;
+    left:40vw;
     top:-110px
   }
   .image-styles {
     max-Height:70vh; 
     alignSelf:center;
-    position:relative;
-    top:-120px;
+    position:absolute;
+    top:-90px;
     border-radius:5%;
     width:100%
     display:block;
@@ -178,6 +179,9 @@ const Wrapper = styled.main`
       position:relative;
        top:-30px
       
+    }
+    .content{
+      left:0px;
     }
 
   }

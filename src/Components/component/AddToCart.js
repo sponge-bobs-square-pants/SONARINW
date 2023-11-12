@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom'
 // import { FaCheck } from 'react-icons/fa'
 import { useCartContext } from '../context/CartContext'
 import AmountButtons from './AmountButtons'
+import {GrCircleAlert} from 'react-icons/gr'
+import { IconContext } from "react-icons";
+import {IoAlertCircleOutline} from 'react-icons/io5'
 const AddToCart = ({ Product }) => {
     // console.log(Product[0].Price);
     let Products1 = Product[0];
@@ -15,6 +18,8 @@ const AddToCart = ({ Product }) => {
     // const [mainSize, setMainSize] = useState(Object.keys(Size)[0])
     const [sizeSelected, setSizeSelected] = useState(false);
     const [mainSize, setMainSize] = useState('None')
+    const [buttonClicked, setButtonClicked] = useState(false);
+    
     // const maxAmount = Size[mainSize] || 0;
     // console.log(mainSize);
     
@@ -52,9 +57,22 @@ const AddToCart = ({ Product }) => {
     <div className='colors'>
       <span>SIZE : </span>
       <div>
+        {sizeSelected ?console.log('size is selected'): console.log('size not selected')}
+        {buttonClicked ? console.log('button clicked') : console.log('button not clicked')}
 {Object.entries(Size).map(([size, value], index) => (
   <button key={index} disabled={value <= 0} className={mainSize === size ? 'color-btn active' : value > 0 ? 'color-btn' : 'disabled-btn'} 
-  onClick={() => {
+  style={{
+    border:
+                  (buttonClicked && !sizeSelected && value >= 0 )
+                    ? 'red'
+                    : 'transparent',
+    // borderWidth:'300%',
+    boxShadow:
+                  buttonClicked && !sizeSelected && value >= 0
+                    ? '0 0 5px rgba(255, 0, 0, 0.5)'
+                    : 'none',
+    
+  }} onClick={() => {
     if(value > 0){
       setMainSize(size);
       setSizeSelected(true);
@@ -64,14 +82,48 @@ const AddToCart = ({ Product }) => {
     {size}
   </button>
 ))}
-      </div>
-    </div>
-    {sizeSelected &&
+{(buttonClicked && !sizeSelected) ? 
+<div style={{marginTop:'10px', marginBottom:'-31px', width:'18.5vw', 
+  backgroundColor:'white', 
+   padding:'0px'}}>
+
+        <p style={{padding:'0px', margin:'0px', paddingLeft:'0px', paddingTop:'0px'}}>
+        <IconContext.Provider value={{color:'red', size:'1em'}}>
+          <IoAlertCircleOutline />
+        </IconContext.Provider>
+        </p>
+
+         <p style={{padding:'0px', margin:'0px', paddingLeft:'5px', color:'red', fontSize:'0.7rem',
+        paddingTop:'2px'}}>
+          Please select a size
+        </p>
+
+  </div> 
+  : 
+  null}
+  
+
+  </div>
+  </div>
+    
+    {/* {sizeSelected && */}
     <div className='btn-container'>
-        <AmountButtons amount={amount} increase={increase} decrease={decrease}/>
-        <Link to='/cart' className='btn' style={{textDecoration:'none', textAlign:'center', position:'relative', top:'-67px'}}
-        onClick={() => addToCart(_id, amount, Products1, mainSize, Description)}>Add to Cart</Link>
-    </div>}
+        {/* <AmountButtons amount={amount} increase={increase} decrease={decrease}/> */}
+        <Link to='/cart' className='btn' style={{textDecoration:'none', textAlign:'center', position:'relative', top:'-67px',
+        // cursor: sizeSelected ? 'pointer' : 'not-allowed',
+            // opacity: sizeSelected ? 1 : 0.5,
+          }}
+        onClick={(e) => {
+          setButtonClicked(true);
+          if(sizeSelected){
+            addToCart(_id, amount, Products1, mainSize, Description)
+          }else{
+            e.preventDefault();
+            // alert('Please select a size before adding to cart.');
+          }
+        }}>Add to Cart</Link>
+    </div>
+    {/* } */}
   </Wrapper>)
   
 }
@@ -80,11 +132,13 @@ const Wrapper = styled.section`
   .colors {
     display: grid;
     grid-template-columns: 125px 1fr;
-    align-items: center;
+    align-items: grid-start;
     margin-bottom: 7rem;
     margin-top:-3rem;
     // margin-bottom:100px;
-
+    .icon-red-color {
+      color: red;
+    }
     span {
       text-transform: capitalize;
       font-weight: 700;
