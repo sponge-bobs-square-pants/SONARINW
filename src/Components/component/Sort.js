@@ -9,10 +9,10 @@ const Sort = () => {
   return (
     <Wrapper>
       <div className='btn-container'>
-        {/* <button type='button' className={`${grid_view ? 'active' : null}`}onClick={setGridView}> */}
+        <button type='button' className={`${grid_view ? 'active' : null}`}onClick={setGridView}>
           {/* <BsFillGridFill /> */}
           <IoGrid />
-        {/* </button> */}
+        </button>
         <button type='button' className={`${!grid_view ? 'active' : null}`}onClick={setListView}>
           {/* <BsList /> */}
           <IoMdList />
@@ -163,6 +163,10 @@ const Wrapper = styled.section`
       position:relative;
       top:-260%;
       left:63vw;
+    }
+    .active {
+      background: #A5A58D;
+      color: rgba(255, 255, 255, 1);
     }
     
   }
