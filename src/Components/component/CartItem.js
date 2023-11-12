@@ -4,6 +4,7 @@ import { formatPrice } from '../component/utils/helpers'
 import AmountButtonss from './AmountButtonss'
 import { FaTrash } from 'react-icons/fa'
 import { useCartContext } from '../context/CartContext'
+import {AiFillDelete} from 'react-icons/ai'
 const CartItem = ({ id, image, name, Price, amount, size }) => {
   const { removeItem, toggleAmount } = useCartContext()
   const increase = () => {
@@ -26,7 +27,9 @@ const CartItem = ({ id, image, name, Price, amount, size }) => {
       <h5 className='price'>{formatPrice(Price)}</h5>
       <AmountButtonss amount={amount} increase={increase} decrease={decrease}></AmountButtonss>
       <h5 className='subtotal'>{formatPrice(Price * amount)}</h5>
-      <button type='button' className='remove-btn' onClick={() =>removeItem(id)}><FaTrash /></button>
+      <div type='button' className='remove-btn' onClick={() =>removeItem(id)}>
+        <AiFillDelete  size={15}/>
+      </div>
     </Wrapper>
   )
 }
