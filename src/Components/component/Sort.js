@@ -13,6 +13,9 @@ const Sort = () => {
           {/* <BsFillGridFill /> */}
           <IoGrid  size={20} color={grid_view ? '#fff' : '#000'}/>
         </button>
+        <div className={grid_view ? 'active' : null} onClick={setGridView}>
+        <IoGrid size={15} style={{ color: grid_view ? '#fff' : '#000' }} />
+        </div>
         <button type='button' className={`${!grid_view ? 'active' : null}`} onClick={setListView}>
           {/* <BsList /> */}
           <IoMdList />
