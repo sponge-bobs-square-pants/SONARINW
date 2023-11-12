@@ -16,7 +16,7 @@ const Sort = () => {
         </div>
         <div className={!grid_view ? 'active' : null} onClick={setListView}
         style={{borderRadius:'0.5rem', border:'solid 1px black', alignItems:'center', alignContent:'center', display:'flex',
-        paddingLeft:'5px', paddingRight:'7px', paddingTop:'5px', paddingBottom:'5px'}}>
+        paddingLeft:'5px', paddingRight:'5px', paddingTop:'5px', paddingBottom:'5px'}}>
         <IoMdList size={11} style={{ color: grid_view ? 'active' : null}} />
         </div>
       </div>
