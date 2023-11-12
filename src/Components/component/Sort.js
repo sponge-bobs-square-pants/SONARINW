@@ -9,11 +9,11 @@ const Sort = () => {
   return (
     <Wrapper>
       <div className='btn-container'>
-        <button type='button' className={`${grid_view ? 'active' : null}`}onClick={setGridView}>
+        <button type='button' className={`${grid_view ? 'active' : null}`} onClick={setGridView}>
           {/* <BsFillGridFill /> */}
-          <IoGrid />
+          <IoGrid  size={20} color={grid_view ? '#fff' : '#000'}/>
         </button>
-        <button type='button' className={`${!grid_view ? 'active' : null}`}onClick={setListView}>
+        <button type='button' className={`${!grid_view ? 'active' : null}`} onClick={setListView}>
           {/* <BsList /> */}
           <IoMdList />
         </button>
