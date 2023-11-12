@@ -1,6 +1,8 @@
 import React from 'react'
 import { useFilterContext } from '../context/FilterContext'
 import { BsFillGridFill, BsList } from 'react-icons/bs'
+import {IoGrid} from 'react-icons/io5'
+import {IoMdList} from 'react-icons/io'
 import styled from 'styled-components'
 const Sort = () => {
   const {grid_view, setGridView, setListView, sort, updateSort, all_products} = useFilterContext();
@@ -8,10 +10,12 @@ const Sort = () => {
     <Wrapper>
       <div className='btn-container'>
         <button type='button' className={`${grid_view ? 'active' : null}`}onClick={setGridView}>
-          <BsFillGridFill />
+          {/* <BsFillGridFill /> */}
+          <IoGrid />
         </button>
         <button type='button' className={`${!grid_view ? 'active' : null}`}onClick={setListView}>
-          <BsList />
+          {/* <BsList /> */}
+          <IoMdList />
         </button>
       </div>
       <p className='productinfo'>{all_products.length} Products Found</p>
