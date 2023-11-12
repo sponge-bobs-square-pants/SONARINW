@@ -83,18 +83,14 @@ const AddToCart = ({ Product }) => {
   </button>
 ))}
 {(buttonClicked && !sizeSelected) ? 
-<div style={{marginTop:'10px', marginBottom:'-31px', width:'18.5vw', 
-  backgroundColor:'white', 
-   padding:'0px'}}>
-
-        <p style={{padding:'0px', margin:'0px', paddingLeft:'0px', paddingTop:'0px'}}>
+<div className='alert-class'>
+        <p style={{}} className='alert-icon'>
         <IconContext.Provider value={{color:'red', size:'1em'}}>
           <IoAlertCircleOutline />
         </IconContext.Provider>
         </p>
 
-         <p style={{padding:'0px', margin:'0px', paddingLeft:'5px', color:'red', fontSize:'0.7rem',
-        paddingTop:'2px'}}>
+         <p style={{}} className='alert-text'>
           Please select a size
         </p>
 
@@ -106,13 +102,10 @@ const AddToCart = ({ Product }) => {
   </div>
   </div>
     
-    {/* {sizeSelected && */}
     <div className='btn-container'>
         {/* <AmountButtons amount={amount} increase={increase} decrease={decrease}/> */}
         <Link to='/cart' className='btn' style={{textDecoration:'none', textAlign:'center', position:'relative', top:'-67px',
-        // cursor: sizeSelected ? 'pointer' : 'not-allowed',
-            // opacity: sizeSelected ? 1 : 0.5,
-          }}
+          alignItems:'center'}}
         onClick={(e) => {
           setButtonClicked(true);
           if(sizeSelected){
@@ -136,9 +129,29 @@ const Wrapper = styled.section`
     margin-bottom: 7rem;
     margin-top:-3rem;
     // margin-bottom:100px;
-    .icon-red-color {
-      color: red;
+    .alert-class {
+      margin-Top:10px;
+      margin-Bottom:-31px;
+      width:18.5vw; 
+      backgroundColor:white; 
+      padding:0px;
     }
+    .alert-icon {
+      padding:0px;
+      margin:0px;
+      padding-Left:0px;
+      padding-Top:0px;
+    }
+    .alert-text{
+      padding:0px;
+      margin:0px; 
+      padding-Left:5px; 
+      color:red; 
+      // width:250px;
+      font-Size:0.7rem;
+      padding-Top:2px;
+    }
+
     span {
       text-transform: capitalize;
       font-weight: 700;
@@ -173,6 +186,7 @@ const Wrapper = styled.section`
     display: flex;
     align-items: center;
     justify-content: center;
+    
     svg {
       font-size: 0.75rem;
       color: white;
@@ -223,18 +237,51 @@ const Wrapper = styled.section`
   .btn {
     margin-top: 1rem;
     position:relative;
-    
-    width: 140px;
+    // left:1%;
+    width: 15vw;
     border-radius:0.2rem;
   }
   .btn:hover{
     background:#57574a;
     color:white;
   }
+  
+ 
   @media(max-width: 992px){
+    .colors {
+      flex-direction: column; /* Make the child elements stack vertically */
+    }
     .color-btn{
       margin-bottom: 1rem;
     }
+    .alert-icon {
+      display:block;
+      // grid-direction:column;
+      position:relative;
+      top:50px;
+      left:-75px;
+      // background-color:blue;
+      padding-left: 0px;
+    }
+    .btn {
+      margin-top: 1rem;
+      position: relative;
+      width: 80vw;
+      border-radius: 0.2rem;
+      padding:10px;
+    }
+    .alert-text{
+      padding:0px;
+      margin:0px; 
+      color:red; 
+      display:flex;
+      position:relative;
+      left:-58px;
+      top:10px;
+      font-Size:0.7rem;
+      white-space: nowrap;
+    }
+ 
   }
 `
 export default AddToCart
