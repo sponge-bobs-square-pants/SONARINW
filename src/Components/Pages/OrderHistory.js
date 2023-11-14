@@ -108,7 +108,7 @@ const Wrapper = styled.section`
   border: 1px solid darkgrey;
   border-radius:1rem;
   padding:10px;
-  padding-top:30px;
+  padding-top:10px;
   margin-bottom:20px;
   .container{
     display:flex;
@@ -201,9 +201,12 @@ const Wrapper = styled.section`
    
   }
   @media (max-width: 992px) {
+    padding-top:30px;
     .Description {
       display: none; /* Hide the description for mobile screens */
     }
+  
+
     .container{
       display:flex;
       height:200px;
@@ -226,7 +229,7 @@ const Wrapper = styled.section`
   .show-on-mobile {
     display: grid !important; 
     // background:red;
-    margin-bottom:50px;
+    margin-bottom:34px;
     border:solid 1px black;
   }
   .StatusButtonMobile{
@@ -263,10 +266,31 @@ const Wrapper = styled.section`
           }
       }
       h4 {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.1rem;
         // border:1px solid black;
         position:relative;
         top:-8px;
+      }
+
+      .price {
+        color: #A5A58D;
+        margin-top:0rem;
+        margin-bottom: 0.2rem;
+      }
+
+      .articl{
+      }
+      p {
+        max-width: 45em;
+        margin-bottom: 1rem;
+      }
+      .btn {
+        font-size: 0.5rem;
+        padding: 0.25rem 0.5rem;
+        margin-bottom:0.5rem;
+        background:white;
+        color:black;
+    
       }
   }
 `
