@@ -59,6 +59,8 @@ const SidebarContainer = styled.div`
     cursor: pointer;
     color: black;
     margin-top: 0.2rem;
+    margin-right:0px;
+    padding-right:0px;
   }
   .close-btn:hover {
     color:#A5A58D ;
