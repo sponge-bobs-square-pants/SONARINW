@@ -71,6 +71,18 @@
     /* padding: 0; */
     
 }
+@media(max-width:992px){
+    .wrapper {
+        aspect-ratio: 1.618;
+        width: 90vmin;
+        /* overflow: hidden; */
+        position: relative;
+        top:-100px;
+        /* margin: 0; */
+        /* padding: 0; */
+        
+    }
+}
 
 .wrapper > .shape {
     height: 30%;
