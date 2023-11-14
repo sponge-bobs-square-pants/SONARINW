@@ -56,7 +56,7 @@ const Welcome = () => {
     <div className='container green' >
       <div className='title-wrapper'>
         <div style={{position:'absolute', top:'0px', right:'0vw'}} className='navnav'>
-        <button type='button' style={{background:'transparent',border:'transparent',fontSize:'1.5rem',padding:'1rem'}} className='nav-toggles' onClick={openSidebar}>
+        <button type='button' style={{background:'transparent',border:'transparent',fontSize:'1.5rem',padding:'1rem', color:'black'}} className='nav-toggles' onClick={openSidebar}>
                 <FaBars />
             </button>
         </div>
