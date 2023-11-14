@@ -17,14 +17,14 @@ import {
 const Filter_Reducer = (state, action) => {
     
   if (action.type === LOAD_PRODUCTS) {
-    let maxPrice = action.payload.map((product) => product.Price)
-    maxPrice = Math.max(...maxPrice);
+    // let maxPrice = action.payload.map((product) => product.Price)
+    // maxPrice = Math.max(...maxPrice);
     // console.log(maxPrice);
     return {
       ...state, 
       all_products:[...action.payload], 
       filtered_products: [...action.payload],
-      filters:{...state.filters, max_price:maxPrice, Price:maxPrice}}
+      filters:{...state.filters}}
   }
   if(action.type === SET_GRIDVIEW){
     return {...state, grid_view:true}
@@ -41,7 +41,6 @@ const Filter_Reducer = (state, action) => {
   }
   if(action.type === UPDATE_FILTERS){
     const {name, value} = action.payload
-    // console.log(name, value);
     return{...state, filters:{...state.filters, [name]:value}}
   }
   if(action.type === UPDATE_TOTAL_ITEMS){
@@ -79,11 +78,7 @@ const Filter_Reducer = (state, action) => {
     return{...state, filters:{...state.filters,[name]:value}}
   }
   if(action.type === FILTER_PRODUCTS){
-    
-
-    // const {all_products} = state;
-    // let temp_products = [...all_products]
-    return{...state, filtered_products:action.payload}
+    return{...state}
   }
   if(action.type === CLEAR_FILTERS){
     return{...state, filters:{

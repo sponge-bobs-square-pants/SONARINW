@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useReducer } from 'react'
 import reducer from '../reducers/Filter_Reducer'
 import { products_url} from '../component/utils/constants'
+import { debounce } from 'lodash';
 import {
   LOAD_PRODUCTS,
   SET_GRIDVIEW,
@@ -47,70 +48,63 @@ const FilterContext = React.createContext()
 
 export const FilterProvider = ({ children }) => {
     const {products} = useSidebarContext();
-    
+   
     const [state, dispatch] = useReducer(reducer, initialState);
-
-    useEffect(() => {
-      const loadProducts = async () => {
-        const {sort,page,limit} = state;
-        // const {ProductName, Category} = filters;
-        dispatch({ type: LOAD_PRODUCTS, payload: products });
-  
-        const totalItems = products.length;
-        const totalPages = Math.ceil(totalItems / state.limit);
-        let page1 = 1;
-        // console.log(totalItems, totalPages)
-        const url = `${products_url}?sort=${sort}&page=${page}&limit=${limit}`;
-        try {
-          const response = await axios.get(url);
-          if (response.status === 200) {
-            const { data: products} = response.data;
-            dispatch({ type: SORT_PRODUCTS, payload: products });
-            dispatch({type:UPDATE_PAGE, payload:page1})
-            dispatch({ type: UPDATE_TOTAL_ITEMS, payload: totalItems });
-            dispatch({ type: UPDATE_TOTAL_PAGES, payload: totalPages });
-            dispatch({ type: UPDATE_SORT, payload: sort });
-            // dispatch({ type: SORT_PRODUCTS, payload: products });
-          }
-          else {
-            throw new Error('Network response was not ok');
-          }
-
-         
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
+    const loadProducts = async () => {
+      const {sort,page,limit} = state;
+      const {ProductName, Category} = filters;
+      const totalItems = products.length;
+      const totalPages = Math.ceil(totalItems / state.limit);
+      let page1 = 1;
+      dispatch({ type: LOAD_PRODUCTS, payload: products });
+      // console.log(totalItems, totalPages, sort, page, limit)
+      // console.log('send');
+      // const url = `${products_url}?sort=${sort}&page=${page}&limit=${limit}`;
+      const url = `${products_url}?sort=${sort}&page=${page}&limit=${limit}&ProductName=${ProductName}&Category=${Category}`;
+     
+      try {
+        // console.log('sent1');
         
+        const response = await axios.get(url);
+        
+        if (response.status === 200) {
+          // console.log('sent2');
+          const { data: products} = response.data;
+          
+          dispatch({ type: SORT_PRODUCTS, payload: products });
+          dispatch({type:UPDATE_PAGE, payload:page1})
+          dispatch({ type: UPDATE_TOTAL_ITEMS, payload: totalItems });
+          dispatch({ type: UPDATE_TOTAL_PAGES, payload: totalPages });
+          dispatch({ type: UPDATE_SORT, payload: sort });
+          // dispatch({type:UPDATE_PAGE, payload:page1})
+          // dispatch({ type: LOAD_PRODUCTS, payload: products });
+          // dispatch({type:CLEAR_FILTERS})
+          // dispatch({ type: SORT_PRODUCTS, payload: products });
+        }
+        else {
+          throw new Error('Network response was not ok');
+        }
 
-      };
-  
+       
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+      
+
+    };
+    useEffect(() => {
       loadProducts();
       // eslint-disable-next-line
     }, [products, state.limit]);
     
     const {filters} = state;
-    
-    useEffect(() => {
-      
+   
+    useEffect(() => { 
       const loadFilteredProducts = async () => {
         const {sort,page,limit, filters} = state;
         const {ProductName, Category} = filters;
         dispatch({ type: LOAD_PRODUCTS, payload: products });
-  
-        // const totalItems = products.length;
-        // const totalPages = Math.ceil(totalItems / state.limit);
         let page1 = 1;
-        // console.log(totalItems, totalPages)
-        // if(Category == 'all'){
-          
-        //     dispatch({type:'PRODUCT_NAME', payload:''})
-        //     // dispatch({type:'PRODUCT_NAME', payload:{name,value}});
-        //     const {all_products} = state
-        //     console.log(all_products);
-        //     dispatch({ type: LOAD_PRODUCTS, payload: all_products });
-        //     dispatch({type:UPDATE_PAGE, payload:page1})
-          
-        // }
         const url = `${products_url}?sort=${sort}&page=${page}&limit=${limit}&ProductName=${ProductName}&Category=${Category}`;
 
         try {
@@ -121,11 +115,7 @@ export const FilterProvider = ({ children }) => {
             const { data: products} = response.data;
             dispatch({ type: SORT_PRODUCTS, payload: products });
             dispatch({type:UPDATE_PAGE, payload:page1})
-            // dispatch({ type: UPDATE_TOTAL_ITEMS, payload: totalItems });
-            // dispatch({ type: UPDATE_TOTAL_PAGES, payload: totalPages });
             dispatch({ type: UPDATE_SORT, payload: sort });
-            // dispatch({ type: SORT_PRODUCTS, payload: products });
-            // console.log('i ran');
           }
           else {
             throw new Error('Network response was not ok');
@@ -204,6 +194,7 @@ export const FilterProvider = ({ children }) => {
             
             
           }
+          
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -213,19 +204,6 @@ export const FilterProvider = ({ children }) => {
       Pagination()
       // eslint-disable-next-line
     },[filters.Category, filters.ProductName])
-    // useEffect(() =>{
-    //   dispatch({type:FILTER_PRODUCTS})
-    //   dispatch({type:SORT_PRODUCTS, payload:products})
-    // },[state.filters,state.page])
-
-    // useEffect(()=>{
-    //   const { filtered_products, limit, all_products } = state;
-    //   const totalItems = all_products.length;
-    //   const totalPages = Math.ceil(totalItems / limit);
-    //   // console.log(totalPages)
-    //   dispatch({ type: UPDATE_TOTAL_ITEMS, payload: totalItems });
-    //   dispatch({ type: UPDATE_TOTAL_PAGES, payload: totalPages });
-    // },[state.filtered_products, state.limit, state.totalItems, state.totalPages])
 
     const setGridView = () => {
         dispatch({type:SET_GRIDVIEW});
@@ -247,53 +225,10 @@ export const FilterProvider = ({ children }) => {
       const page = e.target.dataset.page
       let page1 = Number(page)
       const limit = state.limit
-      // let ProductName =state.ProductName
-    //   if(ProductName){
-    //   console.log(ProductName)
-    // }
-    // if(Category === 'all'){
-    //   // console.log(Category);
-    //   // dispatch({type:'PRODUCT_NAME', payload:})
-    //   const val = ''
-    //   const Cat = 'Category'
-    //   dispatch({type:'PRODUCT_NAME', payload:{Cat,val}});
-    //   // console.log(val);
-    //   const {all_products} = state
-    //   console.log(all_products,'Pagination for all');
-    //   dispatch({ type: LOAD_PRODUCTS, payload: all_products });
-    //   const totalItems = products.length;
-    //   const totalPages = Math.ceil(totalItems / state.limit);
-    //   const url = `${products_url}?sort=${sort}&page=${page}&limit=${limit}`;
-    //   try {
-    //     const response = await axios.get(url);
-    //   if (response.status === 200) {
-    //     const { data: products,nbHits} = response.data;
-    //     dispatch({ type: SORT_PRODUCTS, payload: products });
-    //     dispatch({type:UPDATE_PAGE, payload:page1})
-    //     dispatch({ type: UPDATE_TOTAL_ITEMS, payload: totalItems });
-    //     dispatch({ type: UPDATE_TOTAL_PAGES, payload: totalPages });
-    //     dispatch({ type: UPDATE_SORT, payload: sort });
-    //   }else {
-    //     throw new Error('Network response was not ok');
-    //   }
-    //   } catch (error) {
-    //     console.error('Error fetching data:', error);
-    //   }
-     
-
-      // dispatch({type:UPDATE_PAGE, payload:page1})
-      // dispatch({ type: UPDATE_TOTAL_ITEMS, payload: calc });
-      // dispatch({ type: UPDATE_TOTAL_PAGES, payload: totalPages });
-      // dispatch({ type: UPDATE_SORT, payload: value });
-      // dispatch({ type: SORT_PRODUCTS, payload: products });
-      // dispatch({ type: PAGE_FILTER, payload: calc });
-
-    
-  // }else{
       
       dispatch({ type: SORT_PRODUCTS, payload: products });
-      
       dispatch({type:UPDATE_PAGE, payload:page1})
+      
       
       const url = `${products_url}?&sort=${sort}&page=${page}&limit=${limit}&ProductName=${ProductName || ''}&Category=${Category || ''}`;
       try {
@@ -311,59 +246,13 @@ export const FilterProvider = ({ children }) => {
       // console.log(state.page);
     }
   // }
+
     const updateSort = async (e) => {
         // const name = e.target.name;
         const value = e.target.value;
         // let page = e.target.dataset.page;
         const {all_products, filters, limit, page}= state;
         const {ProductName, Category}= filters
-        // let page1 = 1
-        // if(Category === 'all'){
-        //   // console.log(Category);
-        //   // dispatch({type:'PRODUCT_NAME', payload:})
-        //   const val = ''
-        //   const Cat = 'Category'
-        //   dispatch({type:'PRODUCT_NAME', payload:{Cat,val}});
-        //   // console.log(val);
-        //   const {all_products} = state
-        //   console.log(all_products,'Pagination for all');
-        //   dispatch({ type: LOAD_PRODUCTS, payload: all_products });
-        //   const totalItems = products.length;
-        //   const totalPages = Math.ceil(totalItems / state.limit);
-          
-        //   console.log(sort,page, limit);
-        //   const url = `${products_url}?sort=${sort}&page=${page}&limit=${limit}`;
-        //   try {
-        //     const response = await axios.get(url);
-        //   if (response.status === 200) {
-        //     const { data: products,nbHits} = response.data;
-        //     dispatch({ type: SORT_PRODUCTS, payload: products });
-        //     dispatch({type:UPDATE_PAGE, payload:page1})
-        //     dispatch({ type: UPDATE_TOTAL_ITEMS, payload: totalItems });
-        //     dispatch({ type: UPDATE_TOTAL_PAGES, payload: totalPages });
-        //     dispatch({ type: UPDATE_SORT, payload: sort });
-        //   }else {
-        //     throw new Error('Network response was not ok');
-        //   }
-        //   } catch (error) {
-        //     console.error('Error fetching data:', error);
-        //   }
-         
-
-          // dispatch({type:UPDATE_PAGE, payload:page1})
-          // dispatch({ type: UPDATE_TOTAL_ITEMS, payload: calc });
-          // dispatch({ type: UPDATE_TOTAL_PAGES, payload: totalPages });
-          // dispatch({ type: UPDATE_SORT, payload: value });
-          // dispatch({ type: SORT_PRODUCTS, payload: products });
-          // dispatch({ type: PAGE_FILTER, payload: calc });
-
-        
-      // }else{
-        // console.log(value, page)
-        
-        // console.log(ProductName, value)
-        // dispatch({ type: UPDATE_FILTERS, payload: { name: 'ProductName', value: '' } });
-        // console.log(value,page, limit, Category);
         const url = `${products_url}?sort=${value}&page=${page}&limit=${limit}&ProductName=${ProductName || ''}&Category=${Category || ''}
         `;
         try {
@@ -382,38 +271,23 @@ export const FilterProvider = ({ children }) => {
             dispatch({ type: UPDATE_TOTAL_PAGES, payload: totalPages });
             dispatch({ type: UPDATE_SORT, payload: value });
             dispatch({ type: SORT_PRODUCTS, payload: products });
-            dispatch({ type: PAGE_FILTER, payload: calc });
-            
           } else {
             throw new Error('Network response was not ok');
           }
         } catch (error) {
           console.error('Error fetching data:', error);
         }}
-    // }
-    
-    // useEffect(() => {
-    //   const {page, sort} = state;
-        
-    //     // dispatch({ type: UPDATE_SORT, payload: sort });
-    //     console.log('Run this useEffect');
-    //     dispatch({type:UPDATE_PAGE, payload:page})
-    //     dispatch({ type: RESET_PAGE });
-    // },[state.filtered_products,state.filters])
-    // const PageReload = async (e) => {
-    //   const {page, sort, products} = state
-      
-    //   dispatch({type:UPDATE_PAGE, payload:page})
-    //   dispatch({ type: RESET_PAGE });
-    //   dispatch({ type: UPDATE_SORT, payload: sort });
-    //   dispatch({ type: SORT_PRODUCTS, payload: products });
-    //   // dispatch({type:UPDATE_FILTERS, payload:{name, value}});
-    //   dispatch({type:FILTER_PRODUCTS, payload:products})
-    //   dispatch({type:'PAGE_RELOAD', payload:[page, sort, products]})
-    // }
+
     const updateFilters = async (e) => {
       let name = e.target.name;
       let value = e.target.value;
+      let value1 = ''
+      const debounceUpdate = debounce(async() => {
+        let value = e.target.value;
+        value1 = value;
+      }, 100);
+      
+      
       if(name === 'Category'){
         //here
         value = e.target.textContent
@@ -438,9 +312,9 @@ export const FilterProvider = ({ children }) => {
            dispatch({type:UPDATE_PAGE, payload:page})
            dispatch({ type: RESET_PAGE });
            dispatch({ type: UPDATE_SORT, payload: sort });
-           dispatch({ type: SORT_PRODUCTS, payload: products });
-           dispatch({type:UPDATE_FILTERS, payload:{name, value}});
+          //  dispatch({type:UPDATE_FILTERS, payload:{name, value}});
            dispatch({type:FILTER_PRODUCTS, payload:products}) 
+            //  dispatch({ type: SORT_PRODUCTS, payload: products });
            
           //  dispatch({type:UPDATE_PAGE, payload:page})
             // console.log(products);
@@ -456,15 +330,13 @@ export const FilterProvider = ({ children }) => {
         // console.log(Category, ProductName);
 
       }
-      // if(name === 'Color'){
-      //   value = e.target.dataset.Color
-      // }
       if(name === 'ProductName'){
+        debounceUpdate();
         const {sort, page, limit, filters} =state;
         const {Category}= filters;
         // console.log(Category, 'ProductName');
-        dispatch({type:'PRODUCT_NAME', payload:{name,value}})
-        // dispatch({type:UPDATE_FILTERS, payload:{name, value}});
+        // dispatch({type:'PRODUCT_NAME', payload:{name,value}})
+        dispatch({type:UPDATE_FILTERS, payload:{name, value1}});
         // console.log(Category);
         const url = `${products_url}?page=${page}&limit=${limit}&sort=${sort}&Category=${Category || ''}&ProductName=${value}`;
         const url1 = `${products_url}?&ProductName=${value}`;
@@ -477,17 +349,15 @@ export const FilterProvider = ({ children }) => {
           const {data:products1} = response1.data;
           let totalItems = products1.length;
           const totalPages = Math.ceil(totalItems / limit);
-          dispatch({ type: UPDATE_TOTAL_ITEMS, payload: totalItems });
-          dispatch({ type: UPDATE_TOTAL_PAGES, payload: totalPages });
-          // console.log(totalItems, totalPages)
+          // dispatch({ type: UPDATE_TOTAL_ITEMS, payload: totalItems });
+          // dispatch({ type: UPDATE_TOTAL_PAGES, payload: totalPages });
+          // dispatch({type:UPDATE_PAGE, payload:page})
+          // dispatch({ type: RESET_PAGE });
+          // dispatch({ type: UPDATE_SORT, payload: sort });
+          // dispatch({ type: SORT_PRODUCTS, payload: products });
           // dispatch({type:'PRODUCT_NAME', payload:{name,value}})
-          dispatch({type:UPDATE_PAGE, payload:page})
-          dispatch({ type: RESET_PAGE });
-          dispatch({ type: UPDATE_SORT, payload: sort });
-          dispatch({ type: SORT_PRODUCTS, payload: products });
-          // dispatch({type:'PRODUCT_NAME', payload:{name,value}})
-          dispatch({type:UPDATE_FILTERS, payload:{name, value}});
-          dispatch({type:FILTER_PRODUCTS, payload:products})   
+          // dispatch({type:UPDATE_FILTERS, payload:{name, value}});
+          // dispatch({type:FILTER_PRODUCTS, payload:products})   
         }
         else {
             throw new Error('Network response was not ok');
@@ -497,27 +367,20 @@ export const FilterProvider = ({ children }) => {
         }
         
       }
-      // if(name === 'Price'){
-      //   value = Number(value)
-      // }
-      // if(name === 'shipping'){
-      //   value = e.target.checked
-      // }
-      // console.log("running");
       dispatch({type:UPDATE_FILTERS, payload:{name, value}});
     }
 
     const clearFilters = async () => {
       // console.log('Clearing Filters');
-          // const {sort,page,limit, filters} = state;
-          // const {ProductName, Category} = filters;
           dispatch({ type: LOAD_PRODUCTS, payload: products });
-    
           // const totalItems = products.length;
           // const totalPages = Math.ceil(totalItems / state.limit);
           let page1 = 1;
           dispatch({type:CLEAR_FILTERS})
+          // const {ProductName, Category} = filters;
+          // const {sort,page,limit, filters} = state;
           dispatch({type:UPDATE_PAGE, payload:page1})
+          loadProducts();
           // console.log(totalItems, totalPages)
           // const url = `${products_url}?sort=${sort}&page=${page}&limit=${limit}`;
           // try {

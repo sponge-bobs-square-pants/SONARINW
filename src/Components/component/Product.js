@@ -136,8 +136,8 @@ const Wrapper = styled.article`
   }
   
   /* Apply the animation to the element */
-  .animate-slide-in {
-    animation: slideInFromTop 1s ease-in-out forwards; /* Use the animation with a duration of 0.5s */
-  }
+  // .animate-slide-in {
+  //   animation: slideInFromTop 1s ease-in-out forwards; /* Use the animation with a duration of 0.5s */
+  // }
 `
 export default Product

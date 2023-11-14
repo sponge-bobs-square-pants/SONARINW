@@ -26,6 +26,7 @@ const Sort = () => {
           {/* <label htmlFor='sort'>Sort by</label> */} 
           <select name='sort' id='sort' className='sort-input'
             value={sort} onChange={updateSort}>
+              {console.log(sort)}
             <option value='Price'>Price (low-high)</option>
             <option value='-Price'>Price (high-low)</option>
             <option value='Name'>Name (a-z)</option>

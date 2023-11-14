@@ -13,6 +13,7 @@ const Filters = () => {
     updateFilters,
     clearFilters,
     all_products,
+    updateFiltersDebounced,
   } = useFilterContext();
   const categories = getUniqueValues(all_products, 'Category');
   // const companies = getUniqueValues(all_products, 'Company');
@@ -22,14 +23,14 @@ const Filters = () => {
   return <Wrapper>
     <div className='content'>
       <form onSubmit={(e) => {e.preventDefault()}}>
-        <div className='form-control'>
+        {/* <div className='form-control'>
           <input type='text' 
           name='ProductName' 
           placeholder='search here' 
           className='search-input' 
           value={ProductName} 
           onChange={updateFilters} />
-        </div>
+        </div> */}
         <div className='form-control'>
           <h5>Category</h5>
           <div>
