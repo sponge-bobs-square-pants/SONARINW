@@ -75,10 +75,10 @@ const OrderHistory = () => {
                             Amount: {item.amount}
                           </Link>
                            <div className='StatusButtonDiv show-on-mobile'>
-                        <button className='StatusButton' >Order Status</button>
-                        <button className='StatusButton'>Delivery</button>
-                        <button className='StatusButton'>Return</button>
-                        <button className='StatusButton'>Cancel Order</button>
+                        <button className='StatusButtonMobile' >Order Status</button>
+                        <button className='StatusButtonMobile'>Delivery</button>
+                        <button className='StatusButtonMobile'>Return</button>
+                        <button className='StatusButtonMobile'>Cancel Order</button>
                         </div>
                         </div>
                            <div className='StatusButtonDiv hide-on-mobile'>
@@ -87,8 +87,6 @@ const OrderHistory = () => {
                            <button className='StatusButton'>Return</button>
                            <button className='StatusButton'>Cancel Order</button>
                            </div>
-                       
-                        
                       </article>
                     </Wrapper>
                   ))}
@@ -110,7 +108,7 @@ const Wrapper = styled.section`
   border: 1px solid darkgrey;
   border-radius:1rem;
   padding:10px;
-  padding-top:20px;
+  padding-top:30px;
   margin-bottom:20px;
   .container{
     display:flex;
@@ -226,7 +224,15 @@ const Wrapper = styled.section`
     }
   
   .show-on-mobile {
-    display: grid !important; /* Hide on larger screens */
+    display: grid !important; 
+    // background:red;
+    margin-bottom:50px;
+    border:solid 1px black;
+  }
+  .StatusButtonMobile{
+    border:none;
+    background:rgba(10, 10, 10, 0.1)
+    
   }
   .hide-on-mobile {
     display: none !important; /* Show on larger screens */
