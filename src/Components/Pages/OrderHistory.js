@@ -7,6 +7,8 @@ import { formatPrice } from '../component/utils/helpers'
 import ListView from '../component/ListView'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+
+
 const OrderHistory = () => {
     const {userId} = useUserContext();
     const [orderItems, setOrderItems] = useState([]);
@@ -229,12 +231,20 @@ const Wrapper = styled.section`
   .show-on-mobile {
     display: grid !important; 
     // background:red;
-    margin-bottom:34px;
-    border:solid 1px black;
+    margin-bottom:14px;
+    border-top:solid 1px black;
+    // border:dashed 1px black;
+    
+    background:#A5A58D;
   }
   .StatusButtonMobile{
     border:none;
-    background:rgba(10, 10, 10, 0.1)
+    color:black;
+    border-bottom:solid 1px black;
+    font-family: 'Montserrat';
+    font-weight:600;
+    // background:rgba(10, 10, 10, 0.1)
+    background:none;
     
   }
   .hide-on-mobile {
