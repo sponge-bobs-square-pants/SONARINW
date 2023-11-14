@@ -41,6 +41,7 @@ const OrderHistory = () => {
       }
       return text ? text.slice(0, maxLength) + '...' : '';
     }
+
   return (
     <div style={{display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Nav />
@@ -73,13 +74,21 @@ const OrderHistory = () => {
                           <Link className='btn' style={{ textDecoration: 'none', padding: '10px', fontWeight: '700' }}>
                             Amount: {item.amount}
                           </Link>
-                        </div>
-                        <div style={{display:'grid', gap:'10px'}}>
+                           <div className='StatusButtonDiv show-on-mobile'>
                         <button className='StatusButton' >Order Status</button>
                         <button className='StatusButton'>Delivery</button>
                         <button className='StatusButton'>Return</button>
                         <button className='StatusButton'>Cancel Order</button>
                         </div>
+                        </div>
+                           <div className='StatusButtonDiv hide-on-mobile'>
+                           <button className='StatusButton' >Order Status</button>
+                           <button className='StatusButton'>Delivery</button>
+                           <button className='StatusButton'>Return</button>
+                           <button className='StatusButton'>Cancel Order</button>
+                           </div>
+                       
+                        
                       </article>
                     </Wrapper>
                   ))}
@@ -110,6 +119,10 @@ const Wrapper = styled.section`
     // margin-left: -50px;
     // justify-content: flex-end;
     
+  }
+  .StatusButtonDiv{
+    display:grid; 
+    gap:10px;
   }
   .show-on-mobile {
     display: block;
@@ -167,6 +180,12 @@ const Wrapper = styled.section`
   }
   .btn:hover{
   }
+  .show-on-mobile {
+    display: none !important; /* Hide on larger screens */
+  }
+  .hide-on-mobile {
+    display: grid !important; /* Show on larger screens */
+  }
   @media (min-width: 992px) {
     article {
       display: grid;
@@ -192,6 +211,7 @@ const Wrapper = styled.section`
       height:200px;
       margin-left:-50px;
       padding-left:0px;
+      
     }
     .StatusButton{
       padding-left:0px;
@@ -200,6 +220,17 @@ const Wrapper = styled.section`
       padding-top:0px;
       align-self:start
     }
+    .StatusButtonDiv{
+      display:grid; 
+      gap:5px;
+    }
+  
+  .show-on-mobile {
+    display: grid !important; /* Hide on larger screens */
+  }
+  .hide-on-mobile {
+    display: none !important; /* Show on larger screens */
+  }
   }
   @media (max-width: 992px) {
     .fasearch{
