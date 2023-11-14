@@ -77,6 +77,8 @@ const OrderHistory = () => {
                         <div style={{display:'grid', gap:'10px'}}>
                         <button className='StatusButton' >Order Status</button>
                         <button className='StatusButton'>Delivery</button>
+                        <button className='StatusButton'>Return</button>
+                        <button className='StatusButton'>Cancel Order</button>
                         </div>
                       </article>
                     </Wrapper>
@@ -119,6 +121,10 @@ const Wrapper = styled.section`
     padding-bottom:10px;
     padding-top:10px;
     align-self: flex-start;
+    border-Radius:0.25rem;
+    background:white;
+    color:black;
+    border:solid 2px gray;
   }
   .description{
     display:block;
