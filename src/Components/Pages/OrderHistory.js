@@ -233,8 +233,6 @@ const Wrapper = styled.section`
     // background:red;
     margin-bottom:14px;
     border-top:solid 1px black;
-    // border:dashed 1px black;
-    
     background:#A5A58D;
   }
   .StatusButtonMobile{
@@ -243,9 +241,9 @@ const Wrapper = styled.section`
     border-bottom:solid 1px black;
     font-family: 'Montserrat';
     font-weight:600;
+    padding:3px;
     // background:rgba(10, 10, 10, 0.1)
     background:none;
-    
   }
   .hide-on-mobile {
     display: none !important; /* Show on larger screens */
