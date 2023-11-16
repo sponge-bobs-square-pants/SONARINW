@@ -32,33 +32,33 @@ const AddToCart = ({ Product }) => {
     //         return tempAmount
     //     })
     // }
-    const increase = () => {
-      setAmount((oldAmount) => {
-        const sizeStock = Size[mainSize];
-          let tempAmount = oldAmount + 1;
-          if(tempAmount > sizeStock) {
-              tempAmount = sizeStock
-          }
-          return tempAmount
-      })
-  }
-    const decrease = () => {
-        setAmount((oldAmount) => {
-            let tempAmount = oldAmount - 1;
-            if(tempAmount < 1) {
-                tempAmount = 1
-            }
-            return tempAmount
-        })
+  //   const increase = () => {
+  //     setAmount((oldAmount) => {
+  //       const sizeStock = Size[mainSize];
+  //         let tempAmount = oldAmount + 1;
+  //         if(tempAmount > sizeStock) {
+  //             tempAmount = sizeStock
+  //         }
+  //         return tempAmount
+  //     })
+  // }
+  //   const decrease = () => {
+  //       setAmount((oldAmount) => {
+  //           let tempAmount = oldAmount - 1;
+  //           if(tempAmount < 1) {
+  //               tempAmount = 1
+  //           }
+  //           return tempAmount
+  //       })
 
-    }
+  //   }
     // console.log(Size);
   return(<Wrapper>
     <div className='colors'>
       <span>SIZE : </span>
       <div>
-        {sizeSelected ?console.log('size is selected'): console.log('size not selected')}
-        {buttonClicked ? console.log('button clicked') : console.log('button not clicked')}
+        {/* {sizeSelected ?console.log('size is selected'): console.log('size not selected')} */}
+        {/* {buttonClicked ? console.log('button clicked') : console.log('button not clicked')} */}
 {Object.entries(Size).map(([size, value], index) => (
   <button key={index} disabled={value <= 0} className={mainSize === size ? 'color-btn active' : value > 0 ? 'color-btn' : 'disabled-btn'} 
   style={{

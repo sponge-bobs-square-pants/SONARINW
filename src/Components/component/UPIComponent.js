@@ -1,10 +1,12 @@
     import axios from 'axios';
     import React, { useState, useEffect } from 'react'
+    import '../Pages/MainPage.css'
     import { useCartContext } from '../context/CartContext';
     import '../Pages/MainPage.css'
     import styled from 'styled-components';
     import { formatPrice } from './utils/helpers';
     import { useUserContext } from '../context/UserContext';
+    import Loading from './Loading';
     // import { useAuth0 } from '@auth0/auth0-react';
     
     function razorpayScript(src) {
@@ -38,6 +40,7 @@
         const [isFormComplete, setFormComplete] = useState(false);
         const [isButtonDisabled, setButtonDisabled] = useState(true);
         const [phone, setPhone] = useState('');
+        const [isLoading, setIsLoading] = useState(false);
         const key = process.env.REACT_APP_RAZOR_PAY_KEY
         const secureKey = process.env.REACT_APP_SECURE_KEY
         // console.log(key);
@@ -125,6 +128,7 @@
 
         const handlePayment = async () => {
             function generateTransactionID() {
+                
                 const timestamp= Date.now();
                 const RandomNum = Math.floor(Math.random() * 1000000)
                 const MerchantPrefix = 'K';
@@ -147,11 +151,13 @@
                 name,
                 userId,
                 transactionID,
+                cart,
             }
             try {
                 const response = await axios.post(`${process.env.REACT_APP_GENERAL_ROUTE}/razorpay`, data)
                 // const response = await axios.post(`http://localhost:5000/api/v1/razorpay`, data)
                 window.location.href = response.data
+                
                 // console.log(response.data);
             } catch (error) {
                console.log(error, 'Payment error'); 
@@ -185,54 +191,63 @@
             setPhone(e.target.value);
         };
         //   console.log(address, state, city, pincode, email);
-        
         return (
             <FormWrapper>
+                {isLoading && <Loading />}
+                {!isLoading && (
+                    <div>
+                                <form>
+                                <div className="form-group">
+                                    <label>Total Price</label>
+                                    <input type="text" value={formatPrice(amount)} readOnly />
+                                </div>
+                                <div className="form-group">
+                                    <label>Name</label>
+                                    <input type="text" value={name} readOnly />
+                                </div>
+                                <div className="form-group">
+                                    <label>Email Address</label>
+                                    <input type="email" placeholder="Enter your email address" value={email} onChange={handleEmailChange}  onBlur={checkFormCompleteness}/>
+                                </div>
+                                <div className="form-group">
+                                    <label>Address</label>
+                                    <input type="text" placeholder="Enter your address" value={address} onChange={handleAddressChange}  onBlur={checkFormCompleteness}/>
+                                </div>
+                                <div className="form-group">
+                                    <label>Pincode</label>
+                                    <input type="Integer" placeholder="Enter your pincode" value={pincode} onChange={handlePincodeChange}  onBlur={checkFormCompleteness}/>
+                                </div>
+                                <div className="form-group">
+                                    <label>State</label>
+                                    <input type="text" placeholder="Enter your state" value={state} onChange={handleStateChange} onBlur={checkFormCompleteness} />
+                                </div>
+                                <div className="form-group">
+                                    <label>City</label>
+                                    <input type="text" placeholder="Enter your city" value={city} onChange={handleCityChange}  onBlur={checkFormCompleteness}/>
+                                </div>
+                                <div className="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="tel" placeholder="Enter your Phone Number" value={phone} onChange={handlePhoneChange}  onBlur={checkFormCompleteness} pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
+                                </div>
+                                </form>
+                                
+                                <button onClick={async () =>{
+                                    try {
+                                        setIsLoading(true);
+                                        await handleFormSubmit();
+                                        setIsLoading(false);
+                                        await handlePayment();
+                                      } catch (error) {
+                                        // Handle errors if needed
+                                        console.error(error);
+                                      }
+                                }}disabled={isButtonDisabled} className='PayButton'>
+                                    PAY NOW
+                                </button>
+                    </div>
+                )}
             {/* <h2>Checkout Form</h2> */}
-            <form>
-            <div className="form-group">
-                <label>Total Price</label>
-                <input type="text" value={formatPrice(amount)} readOnly />
-            </div>
-            <div className="form-group">
-                <label>Name</label>
-                <input type="text" value={name} readOnly />
-            </div>
-            <div className="form-group">
-                <label>Email Address</label>
-                <input type="email" placeholder="Enter your email address" value={email} onChange={handleEmailChange}  onBlur={checkFormCompleteness}/>
-            </div>
-            <div className="form-group">
-                <label>Address</label>
-                <input type="text" placeholder="Enter your address" value={address} onChange={handleAddressChange}  onBlur={checkFormCompleteness}/>
-            </div>
-            <div className="form-group">
-                <label>Pincode</label>
-                <input type="text" placeholder="Enter your pincode" value={pincode} onChange={handlePincodeChange}  onBlur={checkFormCompleteness}/>
-            </div>
-            <div className="form-group">
-                <label>State</label>
-                <input type="text" placeholder="Enter your state" value={state} onChange={handleStateChange} onBlur={checkFormCompleteness} />
-            </div>
-            <div className="form-group">
-                <label>City</label>
-                <input type="text" placeholder="Enter your city" value={city} onChange={handleCityChange}  onBlur={checkFormCompleteness}/>
-            </div>
-            <div className="form-group">
-                <label>Phone Number</label>
-                <input type="tel" placeholder="Enter your Phone Number" value={phone} onChange={handlePhoneChange}  onBlur={checkFormCompleteness} pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
-            </div>
-            </form>
-            
-            <button onClick={() =>{
-                // getAmount();
-                handleFormSubmit();
-                handlePayment();
-                clearCart();
 
-            }}disabled={isButtonDisabled} className='PayButton'>
-                PAY NOW
-            </button>
         </FormWrapper>
         
         )

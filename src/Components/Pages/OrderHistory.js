@@ -7,11 +7,14 @@ import { formatPrice } from '../component/utils/helpers'
 import ListView from '../component/ListView'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-
+import { useSidebarContext } from '../context/SidebarContext'
+import Loading from '../component/Loading'
+import Error from '../component/Error'
 
 const OrderHistory = () => {
     const {userId} = useUserContext();
     const [orderItems, setOrderItems] = useState([]);
+    const secureKey = process.env.REACT_APP_SECURE_KEY
     // const [itemID, setItemID] = useState([]);
   
     // console.log(userId);
@@ -20,7 +23,10 @@ const OrderHistory = () => {
         // console.log(userId);
         const url=`${process.env.REACT_APP_GENERAL_ROUTE}/Order?id=${userId}`;
         try {
-          const response = await axios.get(url)
+          const headers = {
+            'x-api-key': secureKey,
+        }
+          const response = await axios.get(url, {headers})
           // console.log(response);
           if(response.status === 200){
             const {data} = response
@@ -28,10 +34,12 @@ const OrderHistory = () => {
             setOrderItems(array)
           }
           else{
+            <Error />
             throw new Error('Network response was not ok');
           }
 
         } catch (error) {
+          <Error />
           console.log('error connecting to the database');
         }
       }
