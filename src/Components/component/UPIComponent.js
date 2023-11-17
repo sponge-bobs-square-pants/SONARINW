@@ -240,6 +240,8 @@
                                       } catch (error) {
                                         // Handle errors if needed
                                         console.error(error);
+                                      }finally{
+                                        clearCart();
                                       }
                                 }}disabled={isButtonDisabled} className='PayButton'>
                                     PAY NOW
