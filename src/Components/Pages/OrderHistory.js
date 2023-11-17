@@ -95,7 +95,7 @@ const OrderHistory = () => {
                           </Link>
                            <div className='StatusButtonDiv show-on-mobile'>
                         <button className='StatusButtonMobile' >Order Status</button>
-                        <button className='StatusButtonMobile'>Delivery</button>
+                        <button className='StatusButtonMobile' onClick={() => delhivery()}>Delivery</button>
                         <button className='StatusButtonMobile'>Return</button>
                         <button className='StatusButtonMobile'>Cancel Order</button>
                         </div>
