@@ -10,11 +10,13 @@ import styled from 'styled-components'
 import { useSidebarContext } from '../context/SidebarContext'
 import Loading from '../component/Loading'
 import Error from '../component/Error'
+import { FaTimes } from 'react-icons/fa'
 
 const OrderHistory = () => {
     const {userId} = useUserContext();
     const [orderItems, setOrderItems] = useState([]);
     const secureKey = process.env.REACT_APP_SECURE_KEY
+    const [isModalOpen, setModalOpen] = useState(false);
     // const [itemID, setItemID] = useState([]);
   
     // console.log(userId);
@@ -50,6 +52,13 @@ const OrderHistory = () => {
         return text;
       }
       return text ? text.slice(0, maxLength) + '...' : '';
+    }
+    
+    const toggleModal = () => {
+      setModalOpen(!isModalOpen);
+    };
+    const delhivery = () => {
+      toggleModal();
     }
 
   return (
@@ -93,7 +102,7 @@ const OrderHistory = () => {
                         </div>
                            <div className='StatusButtonDiv hide-on-mobile'>
                            <button className='StatusButton' >Order Status</button>
-                           <button className='StatusButton'>Delivery</button>
+                           <button className='StatusButton' onClick={() => delhivery()}>Delivery</button>
                            <button className='StatusButton'>Return</button>
                            <button className='StatusButton'>Cancel Order</button>
                            </div>
@@ -109,9 +118,47 @@ const OrderHistory = () => {
       </div>
       </div>
       <Footer />
+      {isModalOpen && (
+        <Modal>
+            <ModalContent>
+            <button className='close-btn' type='button' onClick={() => toggleModal()}  style={{background:'transparent', border:'none',
+          position: 'relative',
+          top:'-34vh',
+          left:'30vw',
+          cursor: 'pointer',}}>
+                  <FaTimes size={19}/>
+              </button>
+              <h2>Delivery Modal</h2>
+            </ModalContent>
+          </Modal>
+        )}
     </div>
   )
 }
+const Modal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ModalContent = styled.div`
+  background: white;
+  display:flex;
+  // background:red;
+  // color:white;
+  padding: 20px;
+  width:50vw;
+  height:70vh;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+`;
 const Wrapper = styled.section`
   display: grid;
   row-gap: 3rem;
