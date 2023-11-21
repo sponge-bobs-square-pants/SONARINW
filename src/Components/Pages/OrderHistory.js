@@ -38,8 +38,8 @@ const OrderHistory = () => {
      
       const loadProducts = async () => {
         // console.log(userId);
-        // const url=`${process.env.REACT_APP_GENERAL_ROUTE}/Order?id=${userId}`;
-        const url=`http://localhost:5000/api/v1/Order?id=${userId}`;
+        const url=`${process.env.REACT_APP_GENERAL_ROUTE}/Order?id=${userId}`;
+        // const url=`http://localhost:5000/api/v1/Order?id=${userId}`;
         try {
           const headers = {
             'x-api-key': secureKey,
@@ -91,7 +91,8 @@ const OrderHistory = () => {
       setModalOpen(true);
       const order = orderItems[orderIndex];
       const waybills = order.waybill
-      const URL = `http://localhost:5000/api/v1/packages?waybills=${waybills}`
+      // const URL = `http://localhost:5000/api/v1/packages?waybills=${waybills}`
+      const URL = `${process.env.REACT_APP_GENERAL_ROUTE}/packages?waybills=${waybills}`
       
       try {
         const response = await axios.get(URL);
