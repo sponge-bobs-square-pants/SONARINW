@@ -22,15 +22,15 @@ const OrderHistory = () => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [selectedOrderIndex, setSelectedOrderIndex] = useState(null);
     const [trackingStatus, setTrackingStatus] = useState(null);
-    const mockStatus = {
-      Status: "Manifested",
-      StatusLocation: "Mock Location",
-      StatusDateTime: "2023-11-17T12:34:56.789",
-      RecievedBy: "Mock User",
-      StatusCode: "MOCK-123",
-      StatusType: "UD",
-      Instructions: "Mock instructions for In Transit"
-    };
+    // const mockStatus = {
+    //   Status: "Manifested",
+    //   StatusLocation: "Mock Location",
+    //   StatusDateTime: "2023-11-17T12:34:56.789",
+    //   RecievedBy: "Mock User",
+    //   StatusCode: "MOCK-123",
+    //   StatusType: "UD",
+    //   Instructions: "Mock instructions for In Transit"
+    // };
     // const [itemID, setItemID] = useState([]);
   let isMounted = true;
     // console.log(userId);
@@ -188,7 +188,7 @@ const OrderHistory = () => {
 
                     <div>
                       {/* <p>Waybill: {orderItems[selectedOrderIndex].waybill}</p> */}
-                      <TrackingDiagram status={mockStatus} />
+                      <TrackingDiagram status={trackingStatus} />
                     </div>
 
                   </div>
