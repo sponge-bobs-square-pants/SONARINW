@@ -11,19 +11,35 @@ import { useSidebarContext } from '../context/SidebarContext'
 import Loading from '../component/Loading'
 import Error from '../component/Error'
 import { FaTimes } from 'react-icons/fa'
+import TrackingDiagram from '../component/TrackingDiagram'
 
 const OrderHistory = () => {
     const {userId} = useUserContext();
     const [orderItems, setOrderItems] = useState([]);
+    // const [selectedWaybill, setSelectedWaybill] = useState(null);
+    const [isloading, setIsLoading] = useState(true);
     const secureKey = process.env.REACT_APP_SECURE_KEY
     const [isModalOpen, setModalOpen] = useState(false);
+    const [selectedOrderIndex, setSelectedOrderIndex] = useState(null);
+    const [trackingStatus, setTrackingStatus] = useState(null);
+    const mockStatus = {
+      Status: "Manifested",
+      StatusLocation: "Mock Location",
+      StatusDateTime: "2023-11-17T12:34:56.789",
+      RecievedBy: "Mock User",
+      StatusCode: "MOCK-123",
+      StatusType: "UD",
+      Instructions: "Mock instructions for In Transit"
+    };
     // const [itemID, setItemID] = useState([]);
-  
+  let isMounted = true;
     // console.log(userId);
     useEffect(() => {
+     
       const loadProducts = async () => {
         // console.log(userId);
-        const url=`${process.env.REACT_APP_GENERAL_ROUTE}/Order?id=${userId}`;
+        // const url=`${process.env.REACT_APP_GENERAL_ROUTE}/Order?id=${userId}`;
+        const url=`http://localhost:5000/api/v1/Order?id=${userId}`;
         try {
           const headers = {
             'x-api-key': secureKey,
@@ -31,9 +47,18 @@ const OrderHistory = () => {
           const response = await axios.get(url, {headers})
           // console.log(response);
           if(response.status === 200){
+            
             const {data} = response
-            const array = data.cartArray
-            setOrderItems(array)
+            const orders = data.orders
+            // console.log(orders);
+            // const waybill =data.waybill
+            // const array = data.cartArray
+            // console.log(data);
+            if(isMounted){
+              setOrderItems(orders);
+              setIsLoading(false);
+            }
+            // setIsLoading(false);
           }
           else{
             <Error />
@@ -46,6 +71,10 @@ const OrderHistory = () => {
         }
       }
       loadProducts();
+      return () => {
+        // Cleanup function to set isMounted to false when the component unmounts
+        isMounted = false;
+      };
     }, [userId])
     function truncateText(text, maxLength) {
       if (text && text.length <= maxLength) {
@@ -54,86 +83,121 @@ const OrderHistory = () => {
       return text ? text.slice(0, maxLength) + '...' : '';
     }
     
-    const toggleModal = () => {
-      setModalOpen(!isModalOpen);
-    };
-    const delhivery = () => {
-      toggleModal();
+    // const toggleModal = () => {
+    //   setModalOpen(!isModalOpen);
+    // };
+    const delhivery = async (orderIndex) => {
+      setSelectedOrderIndex(orderIndex);
+      setModalOpen(true);
+      const order = orderItems[orderIndex];
+      const waybills = order.waybill
+      const URL = `http://localhost:5000/api/v1/packages?waybills=${waybills}`
+      
+      try {
+        const response = await axios.get(URL);
+        const status = response.data.Status;
+        // console.log(status);
+        setTrackingStatus(status);
+        console.log(response.data.Status);
+      } catch (error) {
+        console.error('Error fetching shipment tracking data:', error);
+      }
+      // console.log(order.waybill);
+      
     }
+    if(isloading){
+      return <Loading />
+    }
+    else if(orderItems.length === 0 && !isloading){
+      return(// <div style={{display:'grid', placeItems: 'center', height: '100%' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '60vh' }}>
+      <p>No orders found</p>
+      {/* <button onClick='/Products'></button> */}
+      <Link to='/Products' style={{background:'black', padding:'15px',paddingLeft:'30px',paddingRight:'30px',
+      textDecoration:'none', color:'white'}}>Buy</Link>
+      <div></div>
+   </div>)
+           
+    }
+    else {
+      return (
+        <div style={{display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+          <Nav />
+         <div style={{flex: 1,background:'white', paddingLeft:'5vw', paddingTop:'50px',paddingRight:'5vw', paddingBottom:'50px'}}>
+         <div style={{background:'white', padding:'10px'}}>
+                {orderItems.map((order, orderIndex) => (
+                  <div key={orderIndex}>
+                   {/* {console.log(order)} */}
+                    <h2>Order #{orderIndex + 1}</h2>
+                    {/* <p>Waybill: {order.waybill}</p> */}
+                    <ul>
+                      {order.order.map((item, index) => (
+                        
+                        <Wrapper key={index}>
+                          {/* {console.log(item.waybill)} */}
+                          <article className='container'>
+                            <Link to={`/Products/${item.id.replace(/\D/g, '')}`}>
+                              <img src={item.image} alt={item.name} className='img'></img>
+                            </Link>
+                            <div className='upthediv'>
+                              <h4>{item.name}</h4>
+                              <h5 className='price'>{formatPrice(item.Price)}</h5>
+                              <p className='Description'>{truncateText(item.Description, 100)}</p>
+                              <Link className='btn' style={{ textDecoration: 'none', padding: '10px', fontWeight: '700' }}>
+                                Amount: {item.amount}
+                              </Link>
+                               <div className='StatusButtonDiv show-on-mobile'>
+                            <button className='StatusButtonMobile' >Order Status</button>
+                            <button className='StatusButtonMobile' onClick={() => delhivery(orderIndex)}>Delivery</button>
+                            <button className='StatusButtonMobile'>Return</button>
+                            <button className='StatusButtonMobile'>Cancel Order</button>
+                            </div>
+                            </div>
+                               <div className='StatusButtonDiv hide-on-mobile'>
+                               <button className='StatusButton' >Order Status</button>
+                               <button className='StatusButton' onClick={() => delhivery(orderIndex)}>Delivery</button>
+                               <button className='StatusButton'>Return</button>
+                               <button className='StatusButton'>Cancel Order</button>
+                               </div>
+                              
+                          </article>
+                          
+                        </Wrapper>
+                      ))}
+                    </ul>
+                  </div>
+                ))
+              
+              }
+            
+          </div>
+          </div>
+          <Footer />
+          {isModalOpen && selectedOrderIndex !== null && (
+            <Modal>
+                <ModalContent>
+                <button className='close-btn DelhiveryButton' type='button' onClick={() => setModalOpen(false)}  style={{}}>
+                      <FaTimes size={19}/>
+                  </button>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr'}} className='ModelContentDiv'>
 
-  return (
-    <div style={{display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <Nav />
-     <div style={{flex: 1,background:'white', paddingLeft:'5vw', paddingTop:'50px',paddingRight:'5vw', paddingBottom:'50px'}}>
-     <div style={{background:'white', padding:'10px'}}>
-     {orderItems.length === 0 ? (
-            // <div style={{display:'grid', placeItems: 'center', height: '100%' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '60vh' }}>
-               <p>No orders found</p>
-               {/* <button onClick='/Products'></button> */}
-               <Link to='/Products' style={{background:'black', padding:'15px',paddingLeft:'30px',paddingRight:'30px',
-               textDecoration:'none', color:'white'}}>Buy</Link>
-               <div></div>
-            </div>
-          ) : (
-            orderItems.map((order, orderIndex) => (
-              <div key={orderIndex}>
-                <h2>Order #{orderIndex + 1}</h2>
-                <ul>
-                  {order.map((item, index) => (
-                    <Wrapper key={index}>
-                      <article className='container'>
-                        <Link to={`/Products/${item.id.replace(/\D/g, '')}`}>
-                          <img src={item.image} alt={item.name} className='img'></img>
-                        </Link>
-                        <div className='upthediv'>
-                          <h4>{item.name}</h4>
-                          <h5 className='price'>{formatPrice(item.Price)}</h5>
-                          <p className='Description'>{truncateText(item.Description, 100)}</p>
-                          <Link className='btn' style={{ textDecoration: 'none', padding: '10px', fontWeight: '700' }}>
-                            Amount: {item.amount}
-                          </Link>
-                           <div className='StatusButtonDiv show-on-mobile'>
-                        <button className='StatusButtonMobile' >Order Status</button>
-                        <button className='StatusButtonMobile' onClick={() => delhivery()}>Delivery</button>
-                        <button className='StatusButtonMobile'>Return</button>
-                        <button className='StatusButtonMobile'>Cancel Order</button>
-                        </div>
-                        </div>
-                           <div className='StatusButtonDiv hide-on-mobile'>
-                           <button className='StatusButton' >Order Status</button>
-                           <button className='StatusButton' onClick={() => delhivery()}>Delivery</button>
-                           <button className='StatusButton'>Return</button>
-                           <button className='StatusButton'>Cancel Order</button>
-                           </div>
-                      </article>
-                    </Wrapper>
-                  ))}
-                </ul>
-              </div>
-            ))
-          )
-          }
-        
-      </div>
-      </div>
-      <Footer />
-      {isModalOpen && (
-        <Modal>
-            <ModalContent>
-            <button className='close-btn' type='button' onClick={() => toggleModal()}  style={{background:'transparent', border:'none',
-          position: 'relative',
-          top:'-34vh',
-          left:'30vw',
-          cursor: 'pointer',}}>
-                  <FaTimes size={19}/>
-              </button>
-              <h2>Delivery Modal</h2>
-            </ModalContent>
-          </Modal>
-        )}
-    </div>
-  )
+                    <div style={{marginLeft:'-6vw'}}>
+                      <h2>Delivery Status</h2>
+                    </div>
+
+                    <div>
+                      {/* <p>Waybill: {orderItems[selectedOrderIndex].waybill}</p> */}
+                      <TrackingDiagram status={mockStatus} />
+                    </div>
+
+                  </div>
+                </ModalContent>
+              </Modal>
+            )}
+        </div>
+      )
+    }
+  
 }
 const Modal = styled.div`
   position: fixed;
@@ -158,6 +222,40 @@ const ModalContent = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 8px;
+  
+  .ModelContentDiv{
+    column-gap: 160px;
+  }
+
+  .DelhiveryButton{
+    background:transparent;
+    border:none;
+    position: relative;
+    // top:-34vh;
+    // left:30vw;
+    align-self:flex-start;
+    top:-1.5%;
+    left:86%;
+    cursor: pointer;
+  }
+  
+  @media(max-width: 992px){
+    width:78vw;
+    height:30vh;
+    .ModelContentDiv{
+      column-gap: 20px;
+    }
+    .DelhiveryButton{
+      top:-35vh;
+      left:46vw;
+    }
+    .DelhiveryButton{
+      align-self:flex-start;
+      top:-3.9%;
+      left:96%;
+      cursor: pointer;
+    }
+  }
 `;
 const Wrapper = styled.section`
   display: grid;
