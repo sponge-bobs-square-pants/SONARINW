@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
-const TrackingDiagram = ({ status }) => {
+const TrackingDiagram = ({ status, scan }) => {
   const diagramRef = useRef(null);
-
+    console.log(scan);
   useEffect(() => {
     if (status) {
       const diagramContainer = diagramRef.current;
@@ -19,7 +19,33 @@ const TrackingDiagram = ({ status }) => {
   
       // Create a group for the color progress bar
       const colorProgressBarGroup = svg.append('g');
-  
+
+      const infoBoxGroup = svg.append('g');
+        const instruction = scan.map((item) => {
+            return item.ScanDetail.Instructions
+        })
+        console.log(instruction);
+
+        infoBoxGroup
+        .append('foreignObject')
+        .attr('x', -90) // Adjust the x-coordinate based on your layout
+        .attr('y', 30) // Adjust the y-coordinate based on your layout
+        .attr('width', 100) // Set the width of the box
+        .attr('height', 80) // Set the height of the box
+        .attr('font-size', '0.7rem') // Set the font size to a smaller value
+        // .style('border', '1px solid #000') // Set the border style
+        .append('xhtml:div')
+        .style('width', '100%')
+        .style('height', '100%')
+        .style('overflow', 'auto') // Set overflow to auto for scrollability
+        .append('xhtml:div')
+        .style('white-space', 'pre-wrap') // Set white-space to pre-wrap for line breaks
+        .selectAll('div')
+        .data(instruction)
+        .enter()
+        .append('xhtml:div')
+        .html(d => d); // Use html method to parse HTML and allow line breaks
+
       // Draw the empty progress bar
       emptyProgressBarGroup
         .append('rect')
@@ -37,11 +63,11 @@ const TrackingDiagram = ({ status }) => {
               case 'Manifested':
                 return filledHeight;  // Adjusted for Manifested
               case 'Not Picked':
-                return filledHeight * 2.5;  // Adjusted for Not Picked
+                return filledHeight * 2.2;  // Adjusted for Not Picked
               case 'In Transit':
                 return filledHeight * 4.3;  // Adjusted for In Transit
               case 'Pending':
-                return filledHeight * 6; 
+                return filledHeight * 5.8; 
               case 'Dispatched':
                 return filledHeight * 7.6; 
                 case 'Delivered':
@@ -55,36 +81,56 @@ const TrackingDiagram = ({ status }) => {
       // Adjust the filled height
       colorProgressBarGroup
         .append('rect')
-        .attr('x', 48)
+        .attr('x', 47)
         .attr('y', yScale(0))
-        .attr('width', 4)
+        .attr('width', 6)
         .attr('height', getStatusFilledHeight(status.Status, filledHeight))
-        .attr('fill', 'darkorange'); // Set the color to dark yellow
+        .attr('fill', 'darkorange') // Set the color to dark yellow
+        .attr('stroke', 'none');
   
       // Create circles for each status type
-      const circleSpacing = 49;
+      const circleSpacing = 40;
+      const circleSpacing1 = 50;
       const circles = svg
         .selectAll('circle')
-        .data(['Manifested', 'In Transit', 'Pending', 'Dispatched', 'Delivered'])
+        .data(['Manifested', 'In Transit', 'Dispatched', 'Delivered'])
         .enter()
         .append('circle')
         .attr('cx', 50)
-        .attr('cy', (d, i) => (i === 0 ? yScale(i) : yScale(i) + circleSpacing))
+        .attr('cy', (d, i) => (i === 0 ? yScale(i) : i === 1 ? yScale(i) + circleSpacing : yScale(i) + 2 * circleSpacing1)) 
         .attr('r', 15)
-        .attr('fill', (d) => (d === 'Manifested' || (status.Status === 'Not Picked' && d === 'Not Picked') ? 'lightgreen' : getStatusColor(d)))
-        .attr('stroke', (d) => ((status.Status === d || (status.Status === 'Not Picked' && d === 'Manifested')) ? 'black' : 'none'))
+        .attr('fill', (d) => {
+            if (status.Status === 'Pending' && d === 'In Transit') {
+              return 'lightblue'; // Highlight In Transit when status is Pending
+            } else {
+              return d === 'Manifested' || (status.Status === 'Not Picked' && d === 'Not Picked') ? 'lightgreen' : getStatusColor(d);
+            }
+          })
+        .attr('stroke', (d) => {
+            if (status.Status === 'Pending' && d === 'In Transit') {
+              return 'black'; // Highlight In Transit stroke when status is Pending
+            } else {
+              return status.Status === d || (status.Status === 'Not Picked' && d === 'Manifested') ? 'black' : 'none';
+            }
+          })
         .attr('stroke-width', 2);
   
       // Add text next to each circle
       svg
         .selectAll('text')
-        .data(['Manifested', 'In Transit', 'Pending', 'Dispatched', 'Delivered'])
+        .data(['Manifested', 'In Transit', 'Dispatched', 'Delivered'])
         .enter()
         .append('text')
         .attr('x', 80)
-        .attr('y', (d, i) => (i === 0 ? yScale(i) : yScale(i) + circleSpacing + 4))
+        .attr('y', (d, i) => (i === 0 ? yScale(i) : i === 1 ? yScale(i) + circleSpacing + 4 : yScale(i) + 2 * circleSpacing + 22))
         .text((d) => getDisplayText(d))
-        .attr('fill', (d) => ((status.Status === d || (status.Status === 'Not Picked' && d === 'Manifested')) ? 'black' : 'gray'))
+        .attr('fill',(d) => {
+            if (status.Status === 'Pending' && d === 'In Transit') {
+              return 'black'; // Highlight In Transit fill when status is Pending
+            } else {
+              return status.Status === d || (status.Status === 'Not Picked' && d === 'Manifested') ? 'black' : 'gray';
+            }
+          })
         .attr('font-size', 12)
         .attr('text-anchor', 'start');
     }
@@ -97,7 +143,7 @@ const TrackingDiagram = ({ status }) => {
         case 'Not Picked':
           return 'lightyellow';
         case 'In Transit':
-          return 'lightcoral';
+          return 'lightblue';
         case 'Pending':
           return 'lightblue';
         case 'Dispatched':

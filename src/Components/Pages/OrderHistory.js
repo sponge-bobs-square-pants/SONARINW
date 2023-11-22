@@ -22,15 +22,16 @@ const OrderHistory = () => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [selectedOrderIndex, setSelectedOrderIndex] = useState(null);
     const [trackingStatus, setTrackingStatus] = useState(null);
-    // const mockStatus = {
-    //   Status: "Manifested",
-    //   StatusLocation: "Mock Location",
-    //   StatusDateTime: "2023-11-17T12:34:56.789",
-    //   RecievedBy: "Mock User",
-    //   StatusCode: "MOCK-123",
-    //   StatusType: "UD",
-    //   Instructions: "Mock instructions for In Transit"
-    // };
+    const [scanDetail, setScanDetail] = useState(null);
+    const mockStatus = {
+      Status: "Delivered",
+      StatusLocation: "Mock Location",
+      StatusDateTime: "2023-11-17T12:34:56.789",
+      RecievedBy: "Mock User",
+      StatusCode: "MOCK-123",
+      StatusType: "UD",
+      Instructions: "Mock instructions for In Transit"
+    };
     // const [itemID, setItemID] = useState([]);
   let isMounted = true;
     // console.log(userId);
@@ -96,10 +97,13 @@ const OrderHistory = () => {
       
       try {
         const response = await axios.get(URL);
+        // response.data.Scans.map((scan) => {
+          
+        // })
+        const scan = response.data.Scans
+        setScanDetail(scan);
         const status = response.data.Status;
-        // console.log(status);
         setTrackingStatus(status);
-        console.log(response.data.Status);
       } catch (error) {
         console.error('Error fetching shipment tracking data:', error);
       }
@@ -182,13 +186,13 @@ const OrderHistory = () => {
                   </button>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr'}} className='ModelContentDiv'>
 
-                    <div style={{marginLeft:'-6vw'}}>
+                    <div style={{marginLeft:'2vw'}}>
                       <h2>Delivery Status</h2>
                     </div>
 
-                    <div>
+                    <div style={{width:'30vw'}}>
                       {/* <p>Waybill: {orderItems[selectedOrderIndex].waybill}</p> */}
-                      <TrackingDiagram status={trackingStatus} />
+                      <TrackingDiagram status={trackingStatus} scan={scanDetail}/>
                     </div>
 
                   </div>
@@ -225,7 +229,7 @@ const ModalContent = styled.div`
   border-radius: 8px;
   
   .ModelContentDiv{
-    column-gap: 160px;
+    column-gap: 20px;
   }
 
   .DelhiveryButton{
